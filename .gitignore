@@ -1,0 +1,11 @@
+# node modules
+node_modules/
+
+# misc
+*.env
+!example.env
+
+# build
+build/
+**.bundle.js
+bundle.js*
