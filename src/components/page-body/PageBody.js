@@ -2,6 +2,7 @@ import "./page-body.css";
 import React, { useState } from "react";
 
 import SearchBar from "../search/SearchBar";
+import { retrieveWeatherData, geocodeCityName } from "../../api";
 
 export default function PageBody() {
     // store data retrieved from API
@@ -15,17 +16,23 @@ export default function PageBody() {
     async function handleSearchSubmit(event) {
         event.preventDefault();
         try {
-            // const { latitude, longitude } = geocodeCityName(cityName)
+            // geocode city name into latitude and longitude
+            const { latitude, longitude } = await geocodeCityName(cityName)
+
+            // retrieve weather data based on coordinates
             const data = await retrieveWeatherData(
                 {
-                    latitude: 46.04,
-                    longitude: 11.07
+                    latitude: latitude,
+                    longitude: longitude
                 },
                 dataUnits,
                 language
             );
+
+            // store retrieved data
             setWeatherData(data);
             console.log("wheater data", data)
+            // reset search component state 
         } catch(err) {
             console.log(err);
         }
