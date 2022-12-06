@@ -1,6 +1,9 @@
 import "./search-bar.css";
 import React from "react";
 
+const GOOGLE_API_URL = process.env.GOOGLE_API_URL;
+const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
+
 export default function SearchBar({ handleSubmit }) {
 
     return (
