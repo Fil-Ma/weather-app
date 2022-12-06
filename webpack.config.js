@@ -1,4 +1,8 @@
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
+require("dotenv").config();
+
+const CLIENT_PORT = process.env.REACT_APP_PORT;
 
 module.exports = {
     output: {
@@ -13,7 +17,7 @@ module.exports = {
         maxAssetSize: 512000
     },
     devServer: {
-        port: 3000,
+        port: CLIENT_PORT,
         static: path.join(__dirname, "./public"),
         historyApiFallback: true,
         open: true,
@@ -49,4 +53,7 @@ module.exports = {
             },
         ]
     },
+    plugins: [
+        new Dotenv()
+    ]
 }

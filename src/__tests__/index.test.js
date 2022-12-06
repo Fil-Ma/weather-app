@@ -1,8 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 
-import App from "../App";
-import { internalIP } from "webpack-dev-server";
+import App from "../app/App";
 
 describe("App function component", () => {
 
