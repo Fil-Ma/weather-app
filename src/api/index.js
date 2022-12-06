@@ -1,6 +1,9 @@
 "use strict";
-const ENDPOINT_BASE_URL = process.env.ENDPOINT_URL;
-const API_KEY = process.env.API_KEY;
+const OPENWEATHER_API_URL = process.env.OPENWEATHER_API_URL;
+const OPENWEATHER_API_KEY = process.env.OPENWEATHER_API_KEY;
+
+const GEOCODE_API_URL = process.env.GEOCODE_API_URL;
+const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
 
 /**
  * retrieve data for a specified city
@@ -13,7 +16,7 @@ const API_KEY = process.env.API_KEY;
  * @param {String} lang
  * @returns {Object|Error} returns data retrieved from api
  */
-export async function retrieveWeatherData(city) {
+export async function retrieveWeatherData(city, dataUnits, lang) {
     try {
         const { latitude, longitude } = city;
 
@@ -23,14 +26,43 @@ export async function retrieveWeatherData(city) {
         }
 
         // set url for fetching data
-        const urlToFetch = `${ENDPOINT_BASE_URL}lat=${latitude}&lon=${longitude}&appid=${API_KEY}`;
+        const urlToFetch = `${OPENWEATHER_API_URL}lat=${latitude}&lon=${longitude}&exclude=minutely&units=${dataUnits}&lang=${lang}&appid=${OPENWEATHER_API_KEY}`;
         
         const response = await fetch(urlToFetch);
 
         const data = await response.json();
-        console.log("retrieved data", data);
         return data;
 
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+/**
+ * geo code city name into coordinates
+ * http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}
+ * &limit={limit}&appid={API key}
+ * 
+ * @param {String} cityName
+ * @returns {Object|Error} coordinates of city
+ */
+export async function geocodeCityName(cityName) {
+    try {
+        const urlToFetch = `${GEOCODE_API_URL}q=${cityName}&limit=5&appid=${GEOCODE_API_KEY}`
+        
+        const response = await fetch(urlToFetch);
+
+        const data = await response.json();
+
+        if (Array.isArray(data)) {
+            throw new Error("invalid city name")
+        }
+        
+        return {
+            latitude: data.lat,
+            longitude: data.lon
+        };
+    
     } catch (error) {
         throw new Error(error);
     }
