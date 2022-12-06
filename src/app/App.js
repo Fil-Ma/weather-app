@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
@@ -9,9 +9,20 @@ export default function App() {
         localStorage.getItem("language") || "en"
     );
 
+    function handleSelectLanguage(event) {
+        event.preventDefault();
+        const newLanguageSelection = event.target.value;
+
+        // set language state variable
+        setLanguage(newLanguageSelection);
+
+        // set entry in local storage for future logins
+        localStorage.setItem("language", newLanguageSelection)
+    }
+
     return (
         <>
-            <Header />
+            <Header handleLanguageChange={handleSelectLanguage} />
             <PageBody />
             <Footer />
         </>
