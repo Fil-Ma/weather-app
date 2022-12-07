@@ -1,14 +1,21 @@
 import React from "react";
+import {
+    AppBar,
+    Typography,
+    Button,
+    IconButton,
+    Toolbar,
+    Tooltip, 
+} from "@mui/material";
 
-import Box from '@mui/material/Box';
-import AppBar from '@mui/material/AppBar';
-import Typography from "@mui/material/Typography";
-import Button from '@mui/material/Button';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+
+import { useThemeContext } from "../contexts/ThemeContext";
 
 // component style 
 const headerStyle = {
     display: "flex", 
-    backgroundColor: "red",
     position: "relative",
     height: "4rem",
     flexDirection: "row",
@@ -20,15 +27,28 @@ const headerStyle = {
 /*
     HEADER COMPONENT
 */
-export default function Header({ handleLanguageChange }) {
+export default function Header() {
+    const { theme, toggleTheme } = useThemeContext();
 
     return (
         <AppBar sx={headerStyle} >
-            <Typography>This is the header</Typography>
-            <Box>
-                <Button sx={{ color: "#FFF" }}>Language</Button>
-                <Button sx={{ color: "#FFF" }}>Theme</Button>
-            </Box>
+            <Typography sx={{ color: "#FFF" }}>This is the header</Typography>
+
+            <Toolbar>
+                <Button 
+                    sx={{ color: "#FFF" }} 
+                >Language</Button>
+
+                <Tooltip title="Change Theme" arrow={true}>
+                    <IconButton onClick={toggleTheme}>
+                        { 
+                            theme === "light"
+                                ? <DarkModeIcon />
+                                : <LightModeIcon />
+                        }
+                    </IconButton>
+                </Tooltip>
+            </Toolbar>
         </AppBar>
     )
 }

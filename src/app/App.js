@@ -4,27 +4,23 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import PageBody from "../components/PageBody";
 
+import { ThemeProvider } from '@mui/material/styles';
+import { lightTheme, darkTheme } from "../contexts/themes";
+import { useThemeContext } from "../contexts/ThemeContext";
+
 export default function App() {
     const [language, setLanguage] = useState(
         localStorage.getItem("language") || "en"
     );
-
-    function handleSelectLanguage(event) {
-        event.preventDefault();
-        const newLanguageSelection = event.target.value;
-
-        // set language state variable
-        setLanguage(newLanguageSelection);
-
-        // set entry in local storage for future logins
-        localStorage.setItem("language", newLanguageSelection)
-    }
+    const { theme } = useThemeContext();
 
     return (
-        <>
-            <Header handleLanguageChange={handleSelectLanguage} />
-            <PageBody />
-            <Footer />
+        <>  
+            <ThemeProvider theme={ theme === "light" ? lightTheme : darkTheme }>
+                <Header />
+                <PageBody />
+                <Footer />
+            </ThemeProvider>
         </>
     )
 }
