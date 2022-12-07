@@ -12,6 +12,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 import { useThemeContext } from "../contexts/ThemeContext";
+import { useLanguageContext } from "../contexts/LanguageContext";
 
 // component style 
 const headerStyle = {
@@ -29,6 +30,7 @@ const headerStyle = {
 */
 export default function Header() {
     const { theme, toggleTheme } = useThemeContext();
+    const { language, changeLanguage } = useLanguageContext();
 
     return (
         <AppBar sx={headerStyle} >
