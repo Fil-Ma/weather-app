@@ -9,3 +9,7 @@ node_modules/
 build/
 **.bundle.js
 bundle.js*
+
+# example notes 
+**-example.js
+examples/
