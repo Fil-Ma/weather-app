@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -9,9 +9,6 @@ import { lightTheme, darkTheme } from "../contexts/themes";
 import { useThemeContext } from "../contexts/ThemeContext";
 
 export default function App() {
-    const [language, setLanguage] = useState(
-        localStorage.getItem("language") || "en"
-    );
     const { theme } = useThemeContext();
 
     return (
