@@ -1,8 +1,8 @@
-import "./page-body.css";
 import React, { useState } from "react";
 
-import SearchBar from "../search/SearchBar";
-import { retrieveWeatherData, geocodeCityName } from "../../api";
+import Box from "@mui/material/Box";
+import SearchBar from "./SearchBar";
+import { retrieveWeatherData, geocodeCityName } from "../api";
 
 export default function PageBody() {
     // store data retrieved from API
@@ -17,7 +17,7 @@ export default function PageBody() {
         event.preventDefault();
         try {
             // geocode city name into latitude and longitude
-            const { latitude, longitude } = await geocodeCityName(cityName)
+            const { latitude, longitude } = await geocodeCityName(newValue)
 
             // retrieve weather data based on coordinates
             const data = await retrieveWeatherData(
@@ -39,8 +39,8 @@ export default function PageBody() {
     }
 
     return (
-        <main>
-            <SearchBar handleSubmit={handleSearchSubmit}/>
+        <Box component="main" sx={{ py: "3rem", px: "4rem" }}>
+            <SearchBar handleChange={handleSearchSubmit} />
 
             {/* 
                 current forecast and alerts 
@@ -53,6 +53,6 @@ export default function PageBody() {
                 weatherData.hourly
                 weatherData.daily
             */}
-        </main>
+        </Box>
     )
 }
