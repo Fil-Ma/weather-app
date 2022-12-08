@@ -58,7 +58,7 @@ export default function Header() {
 
     return (
         <AppBar sx={headerStyle} >
-            <Typography sx={{ color: "#FFF" }}>
+            <Typography>
                 {dictionary.header.title}
             </Typography>
 
@@ -74,7 +74,7 @@ export default function Header() {
                     fullWidth
                     maxWidth="xs"
                     onClose={handleCloseLanguageDialog}>
-                        <DialogTitle>{dictionary.header["dialog-title"]}</DialogTitle>
+                        <DialogTitle >{dictionary.header["dialog-title"]}</DialogTitle>
                         <DialogContent>
                             <Box component="form" sx={{ display: 'flex' }}>
                                 <FormControl sx={{ m: 1, minWidth: 150 }}>
