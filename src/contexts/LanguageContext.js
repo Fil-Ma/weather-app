@@ -1,20 +1,29 @@
 import React, { createContext, useContext, useState } from "react";
+import { dictionaryList } from "./languages";
 
 // language context
 const LanguageContext = createContext();
 
 // function context provider
 export default function LanguageContextProvider({ children }) {
-    const [language, setLanguage] = useState(
-        localStorage.getItem("theme") || "en"
+    const [userLanguage, setUserLanguage] = useState(
+        localStorage.getItem("language") || "en"
     );
 
-    function changeLanguage() {
-        // set new value of language
+    function changeLanguage(event) {
+        const newLanguage = event.target.value;
+        setUserLanguage(newLanguage)
+        localStorage.setItem("language", newLanguage)
+    }
+
+    const provider = {
+        language: userLanguage,
+        dictionary: dictionaryList[userLanguage],
+        changeUserLanguage: changeLanguage
     }
 
     return (
-        <LanguageContext.Provider value={{ language, changeLanguage }}>
+        <LanguageContext.Provider value={provider}>
             { children }
         </LanguageContext.Provider>
     )

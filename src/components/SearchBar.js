@@ -5,17 +5,22 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
+import { useLanguageContext } from "../contexts/LanguageContext";
+
 const GOOGLE_API_URL = process.env.GOOGLE_API_URL;
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 
 export default function SearchBar({ handleChange }) {
     const [searchValue, setSearchValue] = useState("");
     const [options, setOptions] = useState([]);
+    const { language, dictionary } = useLanguageContext();
 
     return (
         <Box className="search-bar" sx={{ width: 1/2, mb: "2rem", mx: "auto" }}>
             <Typography>
-                Enter the name of the city you want to see the forecast for:
+                {
+                    dictionary["search-bar"].title
+                }
             </Typography>
 
             <Autocomplete
@@ -29,7 +34,7 @@ export default function SearchBar({ handleChange }) {
                     setSearchValue(newInputValue);
                 }}
                 renderInput={(params) => (
-                    <TextField {...params} label="Add a location" fullWidth />
+                    <TextField {...params} label={dictionary["search-bar"]["autocomplete-placeholder"]} fullWidth />
                 )}
              />
         </Box>

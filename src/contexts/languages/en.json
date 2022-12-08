@@ -1,0 +1,15 @@
+{
+    "header": {
+        "title": "This is a header",
+        "language-icon-hover": "Change Language",
+        "theme-icon-hover": "Change Theme",
+        "dialog-title": "Select the language:",
+        "dialog-input-label": "Language",
+        "dialog-cancel": "Cancel",
+        "dialog-accept": "Confirm"
+    },
+    "search-bar": {
+        "title": "Enter the name of the city you want to see the forecast for:",
+        "autocomplete-placeholder": "Add a location"
+    }
+}

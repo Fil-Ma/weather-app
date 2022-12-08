@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import Box from "@mui/material/Box";
 import SearchBar from "./SearchBar";
+
+import { useLanguageContext } from "../contexts/LanguageContext";
 import { retrieveWeatherData, geocodeCityName } from "../api";
 
 export default function PageBody() {
@@ -10,7 +12,7 @@ export default function PageBody() {
     // store data for the API request
     const [cityName, setCityName] = useState("");
     const [dataUnits, setDataUnits] = useState("standard");
-    const language = "en"
+    const { language } = useLanguageContext();
 
     // handle form submit
     async function handleSearchSubmit(event) {

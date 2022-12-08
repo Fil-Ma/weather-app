@@ -1,0 +1,15 @@
+{
+    "header": {
+        "title": "Questo è un header",
+        "language-icon-hover": "Cambia Lingua",
+        "theme-icon-hover": "Cambia tema",
+        "dialog-title": "Seleziona la lingua:",
+        "dialog-input-label": "Lingua",
+        "dialog-cancel": "Annulla",
+        "dialog-accept": "Conferma"
+    },
+    "search-bar": {
+        "title": "Inserisci il nome della città per cui vedere il bollettino meteo:",
+        "autocomplete-placeholder": "Aggiungi una località"
+    }
+}
