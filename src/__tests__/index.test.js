@@ -82,7 +82,14 @@ describe("Header component", () => {
 describe("PageBody component", () => {
 
     it("renders withour errors", () => {
-        render(<PageBody />, { wrapper: AllTheProviders})
+        render(<PageBody />, { wrapper: AllTheProviders })
+    })
+})
+
+describe("Search bar component", () => {
+
+    it("renders without errors", () => {
+        render(<SearchBar />, { wrapper: AllTheProviders })
     })
 })
 
