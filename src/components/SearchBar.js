@@ -114,7 +114,6 @@ export default function SearchBar() {
                 autoComplete
                 includeInputInList
                 filterSelectedOptions
-                autoHighlight
                 getOptionLabel={(option) => typeof option === "string" ? option : option.description }
                 filterOptions={(x) => x}
                 options={options}
