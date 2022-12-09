@@ -52,8 +52,8 @@ describe("Header component", () => {
         it("should change colors if clicked", () => {
             render(<App />, { wrapper: AllTheProviders})
 
-            // const toggleThemeButton = screen.getByLabelText("Change Theme", { selector: "button" })
-            // fireEvent.click(toggleThemeButton);
+            const toggleThemeButton = screen.getByLabelText("Change Theme", { selector: "button" })
+            fireEvent.click(toggleThemeButton);
         })
     })
 
