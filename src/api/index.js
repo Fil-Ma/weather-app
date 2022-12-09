@@ -2,9 +2,6 @@
 const OPENWEATHER_API_URL = process.env.OPENWEATHER_API_URL;
 const OPENWEATHER_API_KEY = process.env.OPENWEATHER_API_KEY;
 
-const GEOCODE_API_URL = process.env.GEOCODE_API_URL;
-const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
-
 /**
  * retrieve data for a specified city
  * https://api.openweathermap.org/data/3.0/onecall?lat=
@@ -33,36 +30,6 @@ export async function retrieveWeatherData(city, dataUnits, lang) {
         const data = await response.json();
         return data;
 
-    } catch (error) {
-        throw new Error(error);
-    }
-}
-
-/**
- * geo code city name into coordinates
- * http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}
- * &limit={limit}&appid={API key}
- * 
- * @param {String} cityName
- * @returns {Object|Error} coordinates of city
- */
-export async function geocodeCityName(cityName) {
-    try {
-        const urlToFetch = `${GEOCODE_API_URL}q=${cityName}&limit=5&appid=${GEOCODE_API_KEY}`
-        
-        const response = await fetch(urlToFetch);
-
-        const data = await response.json();
-
-        if (Array.isArray(data)) {
-            throw new Error("invalid city name")
-        }
-        
-        return {
-            latitude: data.lat,
-            longitude: data.lon
-        };
-    
     } catch (error) {
         throw new Error(error);
     }
