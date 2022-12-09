@@ -34,7 +34,7 @@ const headerStyle = {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    px: "4rem"
+    px: "4rem",
 }
 
 /*
