@@ -21,9 +21,9 @@ export async function retrieveWeatherData(city, dataUnits, lang) {
         if (!latitude || !longitude) {
             throw new Error("you must provide latitude and longitude")
         }
-
+        
         // set url for fetching data
-        const urlToFetch = `${OPENWEATHER_API_URL}lat=${latitude}&lon=${longitude}&exclude=minutely&units=${dataUnits}&lang=${lang}&appid=${OPENWEATHER_API_KEY}`;
+        const urlToFetch = `${OPENWEATHER_API_URL}lat=${latitude}&lon=${longitude}&exclude=minutely&appid=${OPENWEATHER_API_KEY}`;
         
         const response = await fetch(urlToFetch);
 
