@@ -9,12 +9,13 @@ import { retrieveWeatherData } from "../api";
 
 export default function PageBody() {
     // API response
-    const [weatherData, setWeatherData] = useState({
-        current: null,
-        alerts: null,
-        daily: null,
-        hourly: null
-    });
+    // const [weatherData, setWeatherData] = useState({
+    //     current: null,
+    //     alerts: null,
+    //     daily: null,
+    //     hourly: null
+    // });
+    const [weatherData, setWeatherData] = useState(null)
     // store data for the API request
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);

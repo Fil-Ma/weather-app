@@ -15,8 +15,8 @@ const footerStyle = {
     flexDirection: "row", 
     alignItems: "center", 
     justifyContent: "space-between",
-    position: "absolute",
-    bottom: 0,
+    // position: "absolute",
+    // bottom: 0,
     height: "4rem",
     px: "4rem",
     width: "calc(100% - 8rem)"

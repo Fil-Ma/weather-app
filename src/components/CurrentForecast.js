@@ -33,7 +33,8 @@ export default function CurrentForecast({ currentData }) {
     // snow
 
     return (
-        <Box>
+        <Box sx={{ my: "3rem" }}>
+            <Typography component="h3" sx={{ display: "block" }}>Current Forecast</Typography>
             <Box>
                 {/* image of current situation */}
                 <Typography>
