@@ -2,13 +2,19 @@ import React, { useState, useEffect } from "react";
 
 import Box from "@mui/material/Box";
 import SearchBar from "./SearchBar";
+import ForecastContainer from "./ForecastContainer";
 
 import { useLanguageContext } from "../contexts/LanguageContext";
 import { retrieveWeatherData } from "../api";
 
 export default function PageBody() {
-    // store data retrieved from API
-    const [weatherQueryResult, setWeatherQueryResult] = useState(null);
+    // API response
+    const [weatherData, setWeatherData] = useState({
+        current: null,
+        alerts: null,
+        daily: null,
+        hourly: null
+    });
     // store data for the API request
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
@@ -43,11 +49,8 @@ export default function PageBody() {
                 dataUnits,
                 language
             );
-
-            // store retrieved data
             setWeatherData(data);
             console.log("wheater data", data)
-            // reset search component state 
         } catch(err) {
             console.log(err);
         }
@@ -57,17 +60,9 @@ export default function PageBody() {
         <Box component="main" sx={{ py: "3rem", px: "4rem" }}>
             <SearchBar /> 
             
-            {/* 
-                current forecast and alerts 
-                weatherData.current and
-                weatherData.alerts
-            */}
+            <button onClick={handleSearchSubmit}>Or use your current position</button>
             
-            {/* 
-                hourly forecast and daily forecast
-                weatherData.hourly
-                weatherData.daily
-            */}
+            <ForecastContainer weatherData={weatherData} />
         </Box>
     )
 }
