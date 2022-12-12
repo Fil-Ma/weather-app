@@ -6,7 +6,7 @@
  */
 export function kelvinToCelsius(kelvinTemperature) {
     const celsiusTemperature = kelvinTemperature - 273.15;
-    return celsiusTemperature.toFixed(2);
+    return celsiusTemperature.toFixed(1);
 }
 
 /**
@@ -17,5 +17,5 @@ export function kelvinToCelsius(kelvinTemperature) {
  */
 export function kelvinToFahrenheit(kelvinTemperature) {
     const fahrenheitTemperature = (kelvinTemperature * 9 / 5) - 459.67;
-    return fahrenheitTemperature.toFixed(2);
+    return fahrenheitTemperature.toFixed(1);
 }
