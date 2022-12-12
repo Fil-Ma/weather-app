@@ -1,11 +1,12 @@
 import React from "react";
 import {
     Box,
-    Typography
+    Typography,
 } from "@mui/material";
 import CurrentForecast from "./CurrentForecast";
-import DailyForecast from "./DailyForecast";
+import DailyForecastTable from "./DailyForecastTable";
 import HourlyForecast from "./HourlyForecast";
+
 import { useLanguageContext } from "../contexts/LanguageContext";
 
 export default function ForecastContainer({ weatherData }) {
@@ -32,30 +33,29 @@ export default function ForecastContainer({ weatherData }) {
             }   
 
             {/* daily forecast */}
-            <Box sx={{ mb: "4rem" }}>
-                <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap", mt: "2rem" }}>
-                    {   
-                        weatherData?.daily && 
-                        weatherData.daily.map((dayData, index) => {
-                            return <DailyForecast 
-                                        key={index} 
-                                        dayForecast={dayData} />
-                        })
-                    }
-                </Box>
-            </Box>
-            
+            {
+                weatherData?.daily && 
+                <DailyForecastTable dailyData={weatherData?.daily.slice(0, 6)} />
+            }
+        
             {/* hourly forecast */}
             <Box sx={{ mb: "4rem" }}>
-                <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "space-around", mt: "2rem" }}>
-                    {   
-                        weatherData?.hourly &&
-                        weatherData.hourly.map((hourData, index) => {
-                            return <HourlyForecast 
-                                        key={index} 
-                                        hourForecast={hourData} />
-                        })
-                    }
+                <Box 
+                    sx={{ 
+                        display: "flex", 
+                        flexDirection: "row", 
+                        flexWrap: "wrap", 
+                        justifyContent: "space-around", 
+                        mt: "2rem" 
+                    }}>
+                        {   
+                            weatherData?.hourly &&
+                            weatherData.hourly.slice(0, 24).map((hourData, index) => {
+                                return <HourlyForecast 
+                                            key={index} 
+                                            hourForecast={hourData} />
+                            })
+                        }
                 </Box>
             </Box>
         </Box>
