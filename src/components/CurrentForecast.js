@@ -37,9 +37,8 @@ export default function CurrentForecast({ currentData }) {
 
     return (
         <Box sx={{ my: "3rem" }}>
-            <Typography component="h3" sx={{ display: "block" }}>Current Forecast</Typography>
-            <Box display="grid" gridTemplateColumns="repeat(2, 1fr)" sx={{ minHeight: "25rem"}} gap={1} >
-
+            <Box display="grid" gridTemplateColumns="repeat(2, 1fr)" sx={{ minHeight: "25rem"}} gap={3} >
+                {/* current weather status: column 1*/}
                 <Box gridColumn="1">
                     <CurrentStatus 
                         location="" 
@@ -47,6 +46,7 @@ export default function CurrentForecast({ currentData }) {
                         currentStatus={currentData.weather[0].description} />
                 </Box>
 
+                {/* current weather data: column 2*/}
                 <Box gridColumn="2">
                     <CurrentWeatherData 
                         date={current.currentDate}
@@ -62,8 +62,6 @@ export default function CurrentForecast({ currentData }) {
                         windSpeed={windSpeed}
                         windDirection={windDirection} />
                 </Box>
-
-                
             </Box>
         </Box>
     )
