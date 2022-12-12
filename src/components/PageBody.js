@@ -14,8 +14,8 @@ export default function PageBody() {
     // store data for the API request
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
-    const [dataUnits, setDataUnits] = useState("standard");
-    const { language } = useLanguageContext();
+    // const { language } = useLanguageContext();
+    const hasGeolocation = navigator.geolocation ? true : false;
     
     // automatically load position from browser
     useEffect(() => {
@@ -42,8 +42,8 @@ export default function PageBody() {
                     latitude: latitude,
                     longitude: longitude
                 },
-                dataUnits,
-                language
+                "standard",
+                "en"
             );
             setWeatherData(data);
             console.log("wheater data", data)
@@ -68,6 +68,7 @@ export default function PageBody() {
                     <SearchBar /> 
 
                     <PositionSearch 
+                        hasGeolocation={hasGeolocation}
                         handleGeopositionSearch={handleSearchSubmit} />
             </Box>
 
