@@ -1,8 +1,11 @@
 import React from "react";
 import {
-    Box,
+    Box, 
     Typography
 } from "@mui/material";
+
+import CurrentStatus from "./current-forecast/CurrentStatus";
+import CurrentWeatherData from "./current-forecast/CurrentWeatherData";
 import { dateToString } from "../utils/dateOperations";
 import { kelvinToCelsius, kelvinToFahrenheit } from "../utils/temperatureOperations";
 
@@ -35,54 +38,32 @@ export default function CurrentForecast({ currentData }) {
     return (
         <Box sx={{ my: "3rem" }}>
             <Typography component="h3" sx={{ display: "block" }}>Current Forecast</Typography>
-            <Box>
-                {/* image of current situation */}
-                <Typography>
-                    status main: { currentData.weather[0].main }
-                </Typography>
-                <Typography>
-                    accurate status: { currentData.weather[0].description }
-                </Typography>
-            </Box>
-            <Box>
-                <Typography>
-                    Current date: { current.currentDate }
-                </Typography>
-                <Typography>
-                    Current time: { current.currentTime }
-                </Typography>
-            </Box>
-            <Box>
-                <Typography>
-                    Sunrise at: { sunrise.currentTime }
-                </Typography>
-                <Typography>
-                    Sunset at: { sunset.currentTime }
-                </Typography>
-            </Box>
-            <Box>
-                <Typography>
-                    Temperature is: { tempC } celsius | { tempF} fahrenheit
-                </Typography>
-                <Typography>
-                    Feels like it is: { feelsLikeC } celsius | { feelsLikeF } fahrenheit
-                </Typography>
-            </Box>
-            <Box>
-                <Typography>
-                    Pressure is {pressure} hPa
-                </Typography>
-                <Typography>
-                    Humidity is {humidity} %
-                </Typography>
-            </Box>
-            <Box>
-                <Typography>
-                    Wind speed is {windSpeed} m/s
-                </Typography>
-                <Typography>
-                    Wind direction is {windDirection} 
-                </Typography>
+            <Box display="grid" gridTemplateColumns="repeat(2, 1fr)" sx={{ minHeight: "25rem"}} gap={1} >
+
+                <Box gridColumn="1">
+                    <CurrentStatus 
+                        location="" 
+                        image={currentData.weather[0].icon} 
+                        currentStatus={currentData.weather[0].description} />
+                </Box>
+
+                <Box gridColumn="2">
+                    <CurrentWeatherData 
+                        date={current.currentDate}
+                        time={current.currentTime}
+                        sunrise={sunrise.currentTime}
+                        sunset={sunset.currentTime}
+                        temperatureCelsius={tempC}
+                        temperatureFahrenheit={tempF}
+                        feelsLikeCelsius={feelsLikeC}
+                        feelsLikeFahrenheit={feelsLikeF}
+                        pressure={pressure}
+                        humidity={humidity}
+                        windSpeed={windSpeed}
+                        windDirection={windDirection} />
+                </Box>
+
+                
             </Box>
         </Box>
     )
