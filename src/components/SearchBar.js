@@ -101,7 +101,7 @@ export default function SearchBar() {
     }, [value, inputValue, fetch])
 
     return (
-        <Box className="search-bar" component="section" sx={{ width: 1/2, mb: "2rem", mx: "auto" }}>
+        <Box className="search-bar" sx={{ width: "70%" }}>
             <Typography>
                 {
                     dictionary["search-bar"].title

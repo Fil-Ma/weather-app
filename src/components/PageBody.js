@@ -6,15 +6,10 @@ import ForecastContainer from "./ForecastContainer";
 
 import { useLanguageContext } from "../contexts/LanguageContext";
 import { retrieveWeatherData } from "../api";
+import PositionSearch from "./PositionSearch";
 
 export default function PageBody() {
     // API response
-    // const [weatherData, setWeatherData] = useState({
-    //     current: null,
-    //     alerts: null,
-    //     daily: null,
-    //     hourly: null
-    // });
     const [weatherData, setWeatherData] = useState(null)
     // store data for the API request
     const [latitude, setLatitude] = useState(null);
@@ -58,11 +53,24 @@ export default function PageBody() {
     }
 
     return (
-        <Box component="main" sx={{ py: "3rem", px: "4rem" }}>
-            <SearchBar /> 
-            
-            <button onClick={handleSearchSubmit}>Or use your current position</button>
-            
+        <Box component="main" sx={{ py: "2rem", px: "4rem" }}>
+            <Box 
+                component="section" 
+                sx={{ 
+                    width: "70%", 
+                    mb: "4rem", 
+                    mx: "auto",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between"
+                }}>
+                    <SearchBar /> 
+
+                    <PositionSearch 
+                        handleGeopositionSearch={handleSearchSubmit} />
+            </Box>
+
             <ForecastContainer weatherData={weatherData} />
         </Box>
     )
