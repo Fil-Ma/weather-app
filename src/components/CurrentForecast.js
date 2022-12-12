@@ -6,10 +6,13 @@ import {
 
 import CurrentStatus from "./current-forecast/CurrentStatus";
 import CurrentWeatherData from "./current-forecast/CurrentWeatherData";
+
+import { getWindDirection, convertToKmh } from "../utils/windOperations";
 import { dateToString } from "../utils/dateOperations";
 import { kelvinToCelsius, kelvinToFahrenheit } from "../utils/temperatureOperations";
 
 export default function CurrentForecast({ currentData }) {
+
     // current time, sunset and sunrise time
     const current = dateToString(currentData.dt);
     const sunrise = dateToString(currentData.sunrise);
@@ -28,8 +31,8 @@ export default function CurrentForecast({ currentData }) {
     const humidity = currentData.humidity;
 
     // wind speed and direction
-    const windSpeed = currentData.wind_speed;
-    const windDirection = currentData.wind_deg;
+    const windSpeed = convertToKmh(currentData.wind_speed);
+    const windDirection = getWindDirection(currentData.wind_deg);
 
     // conditional keys
     // rain 
