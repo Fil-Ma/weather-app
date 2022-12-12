@@ -16,6 +16,27 @@
         "position": {
             "button-text": "use position"
         }
+    },
+    "forecast": {
+        "container": {
+            "no-data-message": "No data available"
+        },
+        "current": {
+            "status": {
+                "location": "Location",
+                "description": "Current status"
+            },
+            "temperature": "Measured temperature: ",
+            "feels-like-temperature": "Feels like: ",
+            "pressure": "Pressure is: ",
+            "humidity": "Humidity is: ",
+            "wind-speed": "Wind speed is: ",
+            "wind-direction": "Wind direction is: ",
+            "sunset": "Sunrise at: ",
+            "sunrise": "Sunset at: "
+        }
     }
+    
+    
     
 }

@@ -16,5 +16,24 @@
         "position": {
             "button-text": "usa posizione"
         }
+    },
+    "forecast": {
+        "container": {
+            "no-data-message": "Nessun dato disponibile"
+        },
+        "current": {
+            "status": {
+                "location": "Posizione",
+                "description": "Situazione corrente"
+            },
+            "temperature": "Temperatura misurata: ",
+            "feels-like-temperature": "Temperatura percepita: ",
+            "pressure": "Pressione: ",
+            "humidity": "Umidità: ",
+            "wind-speed": "Velocità del vento: ",
+            "wind-direction": "Direzione del vento: ",
+            "sunset": "Tramonto: ",
+            "sunrise": "Alba: "
+        }
     }
 }
