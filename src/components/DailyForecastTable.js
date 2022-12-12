@@ -10,15 +10,18 @@ import {
     TableCell
 } from "@mui/material";
 
+import { useLanguageContext } from "../contexts/LanguageContext";
 import { dateToString } from "../utils/dateOperations";
 import { kelvinToCelsius, kelvinToFahrenheit } from "../utils/temperatureOperations";
 import { getWindDirection, convertToKmh } from "../utils/windOperations";
 
 export default function DailyForecastTable({ dailyData }) {
+    const { dictionary } = useLanguageContext();
     const columnLabels = dailyData.map((day) => dateToString(day.dt).currentDate);
     const rows = {
         image: [],
         description: [],
+        precipitationProbability: [],
         rain: [],
         snow: [],
         temperatureCelsius: [], // array min max
@@ -39,8 +42,11 @@ export default function DailyForecastTable({ dailyData }) {
     dailyData.forEach((day) => {
         rows.image.push(day.weather[0].icon)
         rows.description.push(day.weather[0].description)
+
+        rows.precipitationProbability.push((day.pop * 100));
         rows.rain.push(day?.rain ? day.rain : "-")
         rows.snow.push(day?.snow ? day.snow : "-")
+
         rows.temperatureCelsius.push({
             min: kelvinToCelsius(day.temp.min),
             max: kelvinToCelsius(day.temp.max)
@@ -77,12 +83,12 @@ export default function DailyForecastTable({ dailyData }) {
                 p: "1rem 2rem"
             }}>
                 <Typography component="h2">Daily Forecast</Typography>
-                <TableContainer sx={{ height: "30rem", mt: "2rem" }}>
+                <TableContainer sx={{ mt: "2rem" }}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>
                                 <TableCell sx={{ backgroundColor: "primary.main", color: "#FFF"  }}>
-                                    Parameter
+                                    
                                 </TableCell>
                                 {
                                     columnLabels.map((weatherDay, index) => {
@@ -109,7 +115,9 @@ export default function DailyForecastTable({ dailyData }) {
                                     return (
                                         <TableRow key={index}>
                                             <TableCell align="left">
-                                                {rowKey}
+                                                {
+                                                    dictionary.forecast.daily["row-labels"][rowKey]
+                                                }
                                             </TableCell>
                                             {
                                                 rows[rowKey].map((element, index) => {
