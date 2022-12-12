@@ -34,6 +34,26 @@
             "wind-direction": "Wind direction is: ",
             "sunset": "Sunrise at: ",
             "sunrise": "Sunset at: "
+        },
+        "daily": {
+            "title": "Daily Forecast",
+            "row-labels": {
+                "image": "",
+                "description": "Weather",
+                "precipitationProbability": "Precipitation (%)",
+                "rain": "Rain (mm)",
+                "snow": "Snow (mm)",
+                "temperatureCelsius": "Temperature (min|max)",
+                "feelsLikeCelsius": "Feels like (min|max)",
+                "pressure": "Pressure (hPa)",
+                "humidity": "Humidity (%)",
+                "windSpeed": "Wind speed (Km/h)",
+                "windDirection": "Wind direction",
+                "sunrise": "Sunrise time",
+                "sunset": "Sunset time",
+                "moonrise": "Moonrise time",
+                "moonset": "Moonset time"
+            }
         }
     }
     

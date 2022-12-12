@@ -34,6 +34,26 @@
             "wind-direction": "Direzione del vento: ",
             "sunset": "Tramonto: ",
             "sunrise": "Alba: "
+        },
+        "daily": {
+            "title": "Bollettino giornaliero",
+            "row-labels": {
+                "image": "",
+                "description": "Tempo",
+                "precipitationProbability": "Precipitazioni (%)",
+                "rain": "Pioggia (mm)",
+                "snow": "Neve (mm)",
+                "temperatureCelsius": "Temperatura (min|max)",
+                "feelsLikeCelsius": "Percepita (min|max)",
+                "pressure": "Pressione (hPa)",
+                "humidity": "Umidità (%)",
+                "windSpeed": "Velocità vento (Km/h)",
+                "windDirection": "Direzione vento",
+                "sunrise": "Alba Sole",
+                "sunset": "Tramonto Sole",
+                "moonrise": "Alba Luna",
+                "moonset": "Tramonto Luna"
+            }
         }
     }
 }
