@@ -1,28 +1,17 @@
 import React from "react";
-import {
-    Box,
-    Typography,
-} from "@mui/material";
+import { Box } from "@mui/material";
 import CurrentForecast from "./CurrentForecast";
 import DailyForecastTable from "./DailyForecastTable";
 import HourlyForecast from "./HourlyForecast";
-
-import { useLanguageContext } from "../contexts/LanguageContext";
+import NoData from "./NoData";
 
 export default function ForecastContainer({ weatherData }) {
-    const { dictionary } = useLanguageContext();
 
     return (
         <Box component="section">
             {/* message to display if no location has been entered */}
             {
-                !weatherData && (
-                    <Typography>
-                        {
-                            dictionary.forecast.container["no-data-message"]
-                        }
-                    </Typography>
-                )
+                !weatherData && <NoData />
             }
 
             {/* current forecast */}
