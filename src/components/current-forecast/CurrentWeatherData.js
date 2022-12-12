@@ -5,6 +5,7 @@ import {
     ButtonGroup,
     Button
 } from "@mui/material";
+import { useLanguageContext } from "../../contexts/LanguageContext";
 
 export default function CurrentWeatherData({
     date,
@@ -21,6 +22,7 @@ export default function CurrentWeatherData({
     windDirection
 }) {
     const [isTemperatureCelsius, setIsTemperatureCelsius] = useState(true);
+    const { dictionary } = useLanguageContext();
 
     function toggleTemperatureUnits(event) {
         event.preventDefault();
@@ -46,7 +48,7 @@ export default function CurrentWeatherData({
 
                 <Box gridRow="1">
                     <Typography>
-                        { date } { time }
+                        { time } { date }
                     </Typography>
                 </Box>
 
@@ -64,40 +66,50 @@ export default function CurrentWeatherData({
                     <Typography>
                         {
                             isTemperatureCelsius 
-                                ? `Temperature is: ${temperatureCelsius}° celsius`
-                                : `Temperature is: ${temperatureFahrenheit}° fahrenheit`
+                                ? dictionary.forecast.current.temperature + `${temperatureCelsius}° celsius`
+                                : dictionary.forecast.current.temperature + `${temperatureFahrenheit}° fahrenheit`
                         }
                     </Typography>
                     <Typography>
                         {
                             isTemperatureCelsius 
-                                ? `Feels like it is: ${feelsLikeCelsius}° celsius`
-                                : `Feels like it is: ${feelsLikeFahrenheit}° fahrenheit`
+                                ? dictionary.forecast.current["feels-like-temperature"] + `${feelsLikeCelsius}° celsius`
+                                : dictionary.forecast.current["feels-like-temperature"] + `${feelsLikeFahrenheit}° fahrenheit`
                         }
                     </Typography>
                 </Box>
 
                 <Box gridRow="4/5">
                     <Typography>
-                        Pressure is {pressure} hPa
+                        {
+                            dictionary.forecast.current.pressure + pressure + "hPa"
+                        }
                     </Typography>
                     <Typography>
-                        Humidity is {humidity} %
+                        {
+                            dictionary.forecast.current.humidity + humidity + "%"
+                        }
                     </Typography>
                 </Box>
 
                 <Box gridRow="5/6">
                     <Typography>
-                        Wind speed is {windSpeed} m/s
+                        {
+                            dictionary.forecast.current["wind-speed"] + windSpeed + "Km/h"
+                        }
                     </Typography>
                     <Typography>
-                        Wind direction is {windDirection} 
+                        {
+                            dictionary.forecast.current["wind-direction"] + windDirection
+                        }
                     </Typography>
                 </Box>
 
                 <Box gridRow="6/7">
                     <Typography>
-                        Sunrise at: { sunrise } | Sunset at: { sunset }
+                        {
+                            `${dictionary.forecast.current.sunrise}${sunrise} | ${dictionary.forecast.current.sunset}${sunset}`
+                        }
                     </Typography>
                 </Box>
         </Box>
