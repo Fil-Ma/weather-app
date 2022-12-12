@@ -3,9 +3,11 @@ import {
     Box,
     Button
 } from "@mui/material";
+import { useLanguageContext } from "../contexts/LanguageContext";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 export default function PositionSearch({ hasGeolocation, handleGeopositionSearch }) {
+    const { dictionary } = useLanguageContext()
 
     return (
         <Box sx={{ width: "23%" }}>
@@ -14,7 +16,7 @@ export default function PositionSearch({ hasGeolocation, handleGeopositionSearch
                     <Button
                         sx={{ backgroundColor: "primary.main", color: "primary.contrastText" }}
                         onClick={handleGeopositionSearch}>
-                            <LocationOnIcon /> use position
+                            <LocationOnIcon /> {dictionary.search.position["button-text"]}
                     </Button>
                 )
             }

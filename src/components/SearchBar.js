@@ -104,7 +104,7 @@ export default function SearchBar() {
         <Box className="search-bar" sx={{ width: "70%" }}>
             <Typography>
                 {
-                    dictionary["search-bar"].title
+                    dictionary.search["search-bar"].title
                 }
             </Typography>
 
@@ -126,7 +126,7 @@ export default function SearchBar() {
                     setInputValue(newInputValue);
                 }}
                 renderInput={(params) => (
-                    <TextField {...params} label={dictionary["search-bar"]["autocomplete-placeholder"]} fullWidth />
+                    <TextField {...params} label={dictionary.search["search-bar"]["autocomplete-placeholder"]} fullWidth />
                 )}
                 renderOption={(props, option) => {
                     const matches = option.structured_formatting.main_text_matched_substrings

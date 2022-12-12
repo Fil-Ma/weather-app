@@ -8,8 +8,14 @@
         "dialog-cancel": "Cancel",
         "dialog-accept": "Confirm"
     },
-    "search-bar": {
-        "title": "Enter the name of the city you want to see the forecast for:",
-        "autocomplete-placeholder": "Add a location"
+    "search": {
+        "search-bar": {
+            "title": "Enter the name of the city you want to see the forecast for:",
+            "autocomplete-placeholder": "Add a location"
+        },
+        "position": {
+            "button-text": "use position"
+        }
     }
+    
 }

@@ -8,8 +8,13 @@
         "dialog-cancel": "Annulla",
         "dialog-accept": "Conferma"
     },
-    "search-bar": {
-        "title": "Inserisci il nome della città per cui vedere il bollettino meteo:",
-        "autocomplete-placeholder": "Aggiungi una località"
+    "search": {
+        "search-bar": {
+            "title": "Inserisci il nome della città per cui vedere il bollettino meteo:",
+            "autocomplete-placeholder": "Aggiungi una località"
+        },
+        "position": {
+            "button-text": "usa posizione"
+        }
     }
 }
