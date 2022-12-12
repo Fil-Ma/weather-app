@@ -63,12 +63,6 @@ export default function Header() {
             </Typography>
 
             <Toolbar>
-                <Tooltip title={dictionary.header["language-icon-hover"]} arrow={true}>
-                    <IconButton onClick={handleOpenLanguageDialog}>
-                        <LanguageIcon />
-                    </IconButton>
-                </Tooltip>
-
                 <Dialog 
                     open={isLanguageDialogOpen} 
                     fullWidth
@@ -115,6 +109,12 @@ export default function Header() {
                             </Button>
                         </DialogActions>
                 </Dialog>
+
+                <Tooltip title={dictionary.header["language-icon-hover"]} arrow={true}>
+                    <IconButton onClick={handleOpenLanguageDialog}>
+                        <LanguageIcon />
+                    </IconButton>
+                </Tooltip>
 
                 <Tooltip title={dictionary.header["theme-icon-hover"]} arrow={true}>
                     <IconButton onClick={toggleTheme}>
