@@ -3,12 +3,14 @@ import {
     Box,
     Typography
 } from "@mui/material";
+import { useLanguageContext } from "../../contexts/LanguageContext";
 
 export default function CurrentStatus({
     location,
     image,
     currentStatus
 }) {
+    const { dictionary } = useLanguageContext();
 
     return (
         <Box 
@@ -24,7 +26,7 @@ export default function CurrentStatus({
             }}>
                 <Box gridRow="1" >
                         <Typography>
-                            Location: {location}
+                            {dictionary.forecast.current.status.location}: {location}
                         </Typography>
                 </Box>
 
@@ -34,7 +36,7 @@ export default function CurrentStatus({
 
                 <Box gridRow="6 / 7">
                     <Typography>
-                        Status: { currentStatus }
+                        {dictionary.forecast.current.status.description}: { currentStatus }
                     </Typography>
                 </Box>
         </Box>
