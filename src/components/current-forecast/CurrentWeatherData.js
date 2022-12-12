@@ -35,7 +35,7 @@ export default function CurrentWeatherData({
         <Box 
             display="grid" 
             gridTemplateRows="2rem repeat(4, 1fr) 2rem" 
-            gap={1} 
+            gap={1.5} 
             alignItems="center" 
             sx={{ 
                 backgroundColor: "#FFF", 
