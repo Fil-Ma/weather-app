@@ -6,14 +6,22 @@ import {
 import CurrentForecast from "./CurrentForecast";
 import DailyForecast from "./DailyForecast";
 import HourlyForecast from "./HourlyForecast";
+import { useLanguageContext } from "../contexts/LanguageContext";
 
 export default function ForecastContainer({ weatherData }) {
-    
+    const { dictionary } = useLanguageContext();
+
     return (
         <Box component="section">
             {/* message to display if no location has been entered */}
             {
-                !weatherData && <Typography>No weather data available</Typography>
+                !weatherData && (
+                    <Typography>
+                        {
+                            dictionary.forecast.container["no-data-message"]
+                        }
+                    </Typography>
+                )
             }
 
             {/* current forecast */}
