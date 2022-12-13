@@ -15,11 +15,10 @@ const footerStyle = {
     flexDirection: "row", 
     alignItems: "center", 
     justifyContent: "space-between",
-    // position: "absolute",
-    // bottom: 0,
     height: "4rem",
-    px: "4rem",
-    width: "calc(100% - 8rem)"
+    pl: "4rem",
+    pr: "5.5rem",
+    width: "100%"
 }
 
 const socialLinkStyle = {
