@@ -49,7 +49,7 @@ export default function CurrentWeatherData({
 
                 <Box gridRow="1">
                     <Typography>
-                        { time } { date }
+                        { date } | { time }
                     </Typography>
                 </Box>
 
