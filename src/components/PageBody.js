@@ -46,7 +46,7 @@ export default function PageBody() {
                 "en"
             );
             setWeatherData(data);
-
+            console.log("weather data response", data)
         } catch(err) {
             console.log(err) 
         }
