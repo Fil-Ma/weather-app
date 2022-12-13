@@ -49,6 +49,7 @@ export default function PageBody() {
 
         } catch(err) {
             console.clear();
+            console.log(err)
         }
     }
 
