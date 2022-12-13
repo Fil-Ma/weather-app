@@ -48,8 +48,7 @@ export default function PageBody() {
             setWeatherData(data);
 
         } catch(err) {
-            //console.clear();
-            console.log(err)
+            console.log(err) 
         }
     }
 
