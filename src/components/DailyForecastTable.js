@@ -77,7 +77,8 @@ export default function DailyForecastTable({ dailyData }) {
             sx={{ 
                 mb: "4rem", 
                 minHeight: "30rem", 
-                backgroundColor: "#FFF", 
+                backgroundColor: "background.paper",
+                color: "primary.contrastText", 
                 borderRadius: "1rem", 
                 border: "1px solid rgba(0,0,0,0.3)",
                 p: "1rem 2rem"
@@ -87,7 +88,7 @@ export default function DailyForecastTable({ dailyData }) {
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>
-                                <TableCell sx={{ backgroundColor: "primary.main", color: "#FFF"  }}>
+                                <TableCell sx={{ backgroundColor: "primary.main", color: "primary.contrastText" }}>
                                     
                                 </TableCell>
                                 {
@@ -98,7 +99,7 @@ export default function DailyForecastTable({ dailyData }) {
                                                 key={index} 
                                                 sx={{ 
                                                     backgroundColor: "primary.main", 
-                                                    color: "#FFF" 
+                                                    color: "#FFF"
                                                 }}>
                                                     {
                                                         weatherDay
@@ -114,23 +115,40 @@ export default function DailyForecastTable({ dailyData }) {
                                 Object.keys(rows).map((rowKey, index) => {
                                     return (
                                         <TableRow key={index}>
-                                            <TableCell align="left">
-                                                {
-                                                    dictionary.forecast.daily["row-labels"][rowKey]
-                                                }
+                                            <TableCell 
+                                                sx={{ 
+                                                    backgroundColor: "background.paper", 
+                                                    color: "primary.contrastText" 
+                                                }}
+                                                align="left">
+                                                    {
+                                                        dictionary.forecast.daily["row-labels"][rowKey]
+                                                    }
                                             </TableCell>
                                             {
                                                 rows[rowKey].map((element, index) => {
                                                     if (rowKey === "temperatureCelsius" || rowKey === "feelsLikeCelsius") {
                                                         return (
-                                                            <TableCell align="center" key={index}>
-                                                                { element.min } | { element.max }
+                                                            <TableCell 
+                                                                align="center" 
+                                                                sx={{ 
+                                                                    backgroundColor: "background.paper", 
+                                                                    color: "primary.contrastText" 
+                                                                }}
+                                                                key={index}>
+                                                                    { element.min } | { element.max }
                                                             </TableCell>
                                                         )
                                                     }
                                                     return (
-                                                        <TableCell align="center" key={index}>
-                                                            {element}
+                                                        <TableCell 
+                                                            align="center" 
+                                                            sx={{ 
+                                                                backgroundColor: "background.paper", 
+                                                                color: "primary.contrastText" 
+                                                            }}
+                                                            key={index}>
+                                                                {element}
                                                         </TableCell>
                                                     )
                                                 })

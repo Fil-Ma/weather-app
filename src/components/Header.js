@@ -58,7 +58,7 @@ export default function Header() {
 
     return (
         <AppBar sx={headerStyle} >
-            <Typography>
+            <Typography sx={{ backgroundColor: "primary.main", color: "#FFF" }}>
                 {dictionary.header.title}
             </Typography>
 

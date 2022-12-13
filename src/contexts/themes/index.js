@@ -5,11 +5,11 @@ export const lightTheme = createTheme({
         type: "light",
         primary: {
             main: '#43a047',
-            contrastText: '#FFF'
+            contrastText: '#000'
         },
         background: {
             default: '#eeffee',
-            paper: '#eeffee'
+            paper: '#fff'
         },
     }
 });

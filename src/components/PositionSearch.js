@@ -14,7 +14,11 @@ export default function PositionSearch({ hasGeolocation, handleGeopositionSearch
             {
                 hasGeolocation && (
                     <Button
-                        sx={{ backgroundColor: "primary.main", color: "primary.contrastText" }}
+                        sx={{ 
+                            backgroundColor: "primary.main", 
+                            color: "#FFF",
+                            pr: "12px" 
+                        }}
                         onClick={handleGeopositionSearch}>
                             <LocationOnIcon /> {dictionary.search.position["button-text"]}
                     </Button>

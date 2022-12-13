@@ -19,7 +19,8 @@ export default function CurrentStatus({
             gap={1.5} 
             alignItems="center"
             sx={{ 
-                backgroundColor: "#FFF", 
+                backgroundColor: "background.paper", 
+                color: "primary.contrastText",
                 borderRadius: "1rem",
                 p: "1rem 2rem",
                 border: "1px solid rgba(0,0,0,0.3)"
