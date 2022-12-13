@@ -44,11 +44,11 @@ export default function SearchBar() {
     // if window object is defined and script is not loaded 
     if (typeof window !== "undefined" && !loaded.current) {
         if (!document.querySelector("#google-maps")) {
-            loadScript(
+            /* loadScript(
                 `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places`,
                 document.querySelector("head"),
                 "google-maps"
-            )
+            ) */
         }
 
         loaded.current = true;
