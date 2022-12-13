@@ -11,13 +11,12 @@ import {
 } from "@mui/material";
 
 import { useLanguageContext } from "../contexts/LanguageContext";
-import { dateToString } from "../utils/dateOperations";
-import { kelvinToCelsius, kelvinToFahrenheit } from "../utils/temperatureOperations";
-import { getWindDirection, convertToKmh } from "../utils/windOperations";
+import { normalizeData } from "../utils/dataNormalization";
 
 export default function DailyForecastTable({ dailyData }) {
-    const { dictionary } = useLanguageContext();
-    const columnLabels = dailyData.map((day) => dateToString(day.dt).currentDate);
+    const { language, dictionary } = useLanguageContext();
+
+    const columnLabels = [];
     const rows = {
         image: [],
         description: [],
@@ -25,9 +24,9 @@ export default function DailyForecastTable({ dailyData }) {
         rain: [],
         snow: [],
         temperatureCelsius: [], // array min max
-        // temperatureFahrenheit: [], // array
         feelsLikeCelsius: [], // array day night
-        // feelsLikeFahrenheit: [], // array
+        temperatureFahrenheit: [], // array
+        feelsLikeFahrenheit: [], // array
         pressure: [],
         humidity: [],
         windSpeed: [],
@@ -40,36 +39,36 @@ export default function DailyForecastTable({ dailyData }) {
     }
 
     dailyData.forEach((day) => {
-        rows.image.push(day.weather[0].icon)
-        rows.description.push(day.weather[0].description)
+        const normalizedObject = normalizeData(day, language);
 
-        rows.precipitationProbability.push((day.pop * 100));
-        rows.rain.push(day?.rain ? day.rain : "-")
-        rows.snow.push(day?.snow ? day.snow : "-")
+        // column labels
+        columnLabels.push(normalizedObject.date)
 
-        rows.temperatureCelsius.push({
-            min: kelvinToCelsius(day.temp.min),
-            max: kelvinToCelsius(day.temp.max)
-        })
-        // rows.temperatureCelsius.push({
-        //     min: kelvinToFahrenheit(day.temp.min),
-        //     max: kelvinToFahrenheit(day.temp.max)
-        // })
-        rows.feelsLikeCelsius.push({
-            min: kelvinToCelsius(day.feels_like.night),
-            max: kelvinToCelsius(day.feels_like.day),
-        })
-        // rows.feelsLikeCelsius.push(kelvinToFahrenheit(day.feels_like))
-        rows.pressure.push(day.pressure)
-        rows.humidity.push(day.humidity)
-        rows.windSpeed.push(convertToKmh(day.wind_speed))
-        rows.windDirection.push(getWindDirection(day.wind_deg))
+        // status column
+        rows.image.push(normalizedObject.statusImage)
+        rows.description.push(normalizedObject.statusDescription)
 
-        rows.sunrise.push(dateToString(day.sunrise).currentTime)
-        rows.sunset.push(dateToString(day.sunset).currentTime)
-        rows.moonrise.push(dateToString(day.moonrise).currentTime)
-        rows.moonset.push(dateToString(day.moonset).currentTime)
-        rows.moonphase.push(day.moon_phase)
+        // precipitation, rain, snow volumes
+        rows.precipitationProbability.push(normalizedObject.precipitationProbability)
+        rows.rain.push(normalizedObject?.rain ? normalizedObject.rain : "-")
+        rows.snow.push(normalizedObject?.snow ? normalizedObject.snow : "-")
+
+        // temperatures
+        rows.temperatureCelsius.push(normalizedObject.temperatureCelsius)
+        rows.temperatureFahrenheit.push(normalizedObject.temperatureFahrenheit)
+        rows.feelsLikeCelsius.push(normalizedObject.feelsLikeCelsius)
+        rows.feelsLikeFahrenheit.push(normalizedObject.feelsLikeFahrenheit)
+        
+        rows.pressure.push(normalizedObject.pressure)
+        rows.humidity.push(normalizedObject.humidity)
+        rows.windSpeed.push(normalizedObject.windSpeed)
+        rows.windDirection.push(normalizedObject.windDirection)
+
+        rows.sunrise.push(normalizedObject.sunrise)
+        rows.sunset.push(normalizedObject.sunset)
+        rows.moonrise.push(normalizedObject.moonrise)
+        rows.moonset.push(normalizedObject.moonset)
+        rows.moonphase.push(normalizedObject.moonphase)
     })
 
     return (
@@ -127,7 +126,7 @@ export default function DailyForecastTable({ dailyData }) {
                                             </TableCell>
                                             {
                                                 rows[rowKey].map((element, index) => {
-                                                    if (rowKey === "temperatureCelsius" || rowKey === "feelsLikeCelsius") {
+                                                    if (rowKey === "temperatureCelsius" || rowKey === "feelsLikeCelsius" || rowKey === "temperatureFahrenheit" || rowKey === "feelsLikeFahrenheit") {
                                                         return (
                                                             <TableCell 
                                                                 align="center" 
