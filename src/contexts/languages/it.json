@@ -43,8 +43,10 @@
                 "precipitationProbability": "Precipitazioni (%)",
                 "rain": "Pioggia (mm)",
                 "snow": "Neve (mm)",
-                "temperatureCelsius": "Temperatura (min|max)",
-                "feelsLikeCelsius": "Percepita (min|max)",
+                "temperatureCelsius": "Temperatura (min|max) °C",
+                "feelsLikeCelsius": "Percepita (min|max) °C",
+                "temperatureFahrenheit": "Temperatura (min|max) °F",
+                "feelsLikeFahrenheit": "Percepita (min|max) °F",
                 "pressure": "Pressione (hPa)",
                 "humidity": "Umidità (%)",
                 "windSpeed": "Velocità vento (Km/h)",
@@ -52,7 +54,8 @@
                 "sunrise": "Alba Sole",
                 "sunset": "Tramonto Sole",
                 "moonrise": "Alba Luna",
-                "moonset": "Tramonto Luna"
+                "moonset": "Tramonto Luna",
+                "moonphase": "Fase Luna"
             }
         }
     }

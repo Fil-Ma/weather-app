@@ -43,8 +43,10 @@
                 "precipitationProbability": "Precipitation (%)",
                 "rain": "Rain (mm)",
                 "snow": "Snow (mm)",
-                "temperatureCelsius": "Temperature (min|max)",
-                "feelsLikeCelsius": "Feels like (min|max)",
+                "temperatureCelsius": "Temperature (min|max) °C",
+                "feelsLikeCelsius": "Feels like (min|max) °C",
+                "temperatureFahrenheit": "Temperature (min|max) °F",
+                "feelsLikeFahrenheit": "Feels like (min|max) °F",
                 "pressure": "Pressure (hPa)",
                 "humidity": "Humidity (%)",
                 "windSpeed": "Wind speed (Km/h)",
@@ -52,7 +54,8 @@
                 "sunrise": "Sunrise time",
                 "sunset": "Sunset time",
                 "moonrise": "Moonrise time",
-                "moonset": "Moonset time"
+                "moonset": "Moonset time",
+                "moonphase": "Moon phase"
             }
         }
     }

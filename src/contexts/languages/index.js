@@ -1,7 +1,6 @@
 import en from "./en.json";
 import it from "./it.json";
 
-// Language Tags (BCP 47)
 export const dictionaryList = {
   en, 
   it
