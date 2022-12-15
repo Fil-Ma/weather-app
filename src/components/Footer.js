@@ -18,13 +18,14 @@ const footerStyle = {
     height: "4rem",
     pl: "4rem",
     pr: "5.5rem",
-    width: "100%"
+    width: "100%",
+    color: "primary.contrastText"
 }
 
 const socialLinkStyle = {
     underline: "none",
     ml: "1rem",
-    color: "#000"
+    color: "primary.contrastText"
 }
 
 /*

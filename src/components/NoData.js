@@ -9,12 +9,16 @@ export default function NoData() {
     const { dictionary } = useLanguageContext();
 
     return (
-        <Box sx={{ textAlign: "center", height: "15rem" }}>
-            <Typography component="h2">
-                {
-                    dictionary.forecast.container["no-data-message"]
-                }
-            </Typography>
+        <Box sx={{ 
+            textAlign: "center", 
+            height: "50vh",
+            color: "primary.contrastText" 
+            }}>
+                <Typography component="h2">
+                    {
+                        dictionary.forecast.container["no-data-message"]
+                    }
+                </Typography>
         </Box>
     )
 }

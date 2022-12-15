@@ -102,7 +102,7 @@ export default function SearchBar() {
 
     return (
         <Box className="search-bar" sx={{ width: "70%" }}>
-            <Typography>
+            <Typography sx={{ color: "primary.contrastText" }}>
                 {
                     dictionary.search["search-bar"].title
                 }
@@ -110,7 +110,10 @@ export default function SearchBar() {
 
             <Autocomplete
                 id="autocomplete-input"
-                sx={{  mt: "1.5rem" }}
+                sx={{  
+                    mt: "1.5rem",
+                    borderColor: "primary.contrastText"
+                }}
                 autoComplete
                 includeInputInList
                 filterSelectedOptions
@@ -126,7 +129,16 @@ export default function SearchBar() {
                     setInputValue(newInputValue);
                 }}
                 renderInput={(params) => (
-                    <TextField {...params} label={dictionary.search["search-bar"]["autocomplete-placeholder"]} fullWidth />
+                    <TextField 
+                        {...params} 
+                        label={
+                            dictionary.search["search-bar"]["autocomplete-placeholder"]
+                        } 
+                        sx={{
+                            backgroundColor: "background.paper",
+                            color: "primary.contrastText"
+                        }}
+                        fullWidth />
                 )}
                 renderOption={(props, option) => {
                     const matches = option.structured_formatting.main_text_matched_substrings

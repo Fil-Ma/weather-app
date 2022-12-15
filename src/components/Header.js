@@ -68,11 +68,11 @@ export default function Header() {
                     fullWidth
                     maxWidth="xs"
                     onClose={handleCloseLanguageDialog}>
-                        <DialogTitle >{dictionary.header["dialog-title"]}</DialogTitle>
+                        <DialogTitle sx={{ color: "primary.contrastText" }}>{dictionary.header["dialog-title"]}</DialogTitle>
                         <DialogContent>
                             <Box component="form" sx={{ display: 'flex' }}>
                                 <FormControl sx={{ m: 1, minWidth: 150 }}>
-                                    <InputLabel id="select-language-dialog">
+                                    <InputLabel id="select-language-dialog" sx={{ color: "primary.contrastText" }}>
                                         {
                                             dictionary.header["dialog-input-label"]
                                         }
@@ -82,12 +82,24 @@ export default function Header() {
                                         value={language}
                                         onChange={changeUserLanguage}
                                         input={<OutlinedInput label="Language" />}
+                                        sx={{ 
+                                            color: "primary.contrastText",
+                                            borderColor: "primary.contrastText"  
+
+                                        }}
                                     >
                                         {
                                             Object.keys(languageOptions).map((languageKey, index) => {
                                                 return (
-                                                    <MenuItem value={languageKey} key={index}>
-                                                        {languageOptions[languageKey]}
+                                                    <MenuItem 
+                                                        value={languageKey} 
+                                                        sx={{ 
+                                                            color: "primary.contrastText" 
+                                                        }}
+                                                        key={index}>
+                                                            {
+                                                                languageOptions[languageKey]
+                                                            }
                                                     </MenuItem>
                                                 )
                                             })
