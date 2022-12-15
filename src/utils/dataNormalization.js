@@ -74,7 +74,6 @@ export function normalizeData(dataObject, language = "en") {
     // moonrise and moonset
     const moonriseDateTime = dateToString(dataObject.moonrise, language);
     const moonsetDateTime = dateToString(dataObject.moonset, language); 
-    console.log(precipitationProb)
 
     return {
         date: dateTime.date,
