@@ -24,19 +24,7 @@ export default function CurrentForecast({ currentData }) {
 
                 {/* current weather data: column 2 */}
                 <Box gridColumn="2">
-                    <CurrentWeatherData 
-                        date={normalizedData.date}
-                        time={normalizedData.time}
-                        sunrise={normalizedData.sunrise}
-                        sunset={normalizedData.sunset}
-                        temperatureCelsius={normalizedData.temperatureCelsius}
-                        temperatureFahrenheit={normalizedData.temperatureFahrenheit}
-                        feelsLikeCelsius={normalizedData.feelsLikeCelsius}
-                        feelsLikeFahrenheit={normalizedData.feelsLikeFahrenheit}
-                        pressure={normalizedData.pressure}
-                        humidity={normalizedData.humidity}
-                        windSpeed={normalizedData.windSpeed}
-                        windDirection={normalizedData.windDirection} />
+                    <CurrentWeatherData data={normalizedData} />
                 </Box>
             </Box>
         </Box>

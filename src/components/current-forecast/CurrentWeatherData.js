@@ -7,20 +7,7 @@ import {
 } from "@mui/material";
 import { useLanguageContext } from "../../contexts/LanguageContext";
 
-export default function CurrentWeatherData({
-    date,
-    time,
-    sunrise,
-    sunset,
-    temperatureCelsius,
-    temperatureFahrenheit,
-    feelsLikeCelsius, 
-    feelsLikeFahrenheit,
-    pressure,
-    humidity,
-    windSpeed,
-    windDirection
-}) {
+export default function CurrentWeatherData({ data }) {
     const [isTemperatureCelsius, setIsTemperatureCelsius] = useState(true);
     const { dictionary } = useLanguageContext();
 
@@ -49,7 +36,7 @@ export default function CurrentWeatherData({
 
                 <Box gridRow="1">
                     <Typography>
-                        { date } | { time }
+                        { data.date } | { data.time }
                     </Typography>
                 </Box>
 
@@ -77,15 +64,15 @@ export default function CurrentWeatherData({
                     <Typography>
                         {
                             isTemperatureCelsius 
-                                ? dictionary.forecast.current.temperature + `${temperatureCelsius}° celsius`
-                                : dictionary.forecast.current.temperature + `${temperatureFahrenheit}° fahrenheit`
+                                ? dictionary.forecast.current.temperature + `${data.temperatureCelsius}° celsius`
+                                : dictionary.forecast.current.temperature + `${data.temperatureFahrenheit}° fahrenheit`
                         }
                     </Typography>
                     <Typography>
                         {
                             isTemperatureCelsius 
-                                ? dictionary.forecast.current["feels-like-temperature"] + `${feelsLikeCelsius}° celsius`
-                                : dictionary.forecast.current["feels-like-temperature"] + `${feelsLikeFahrenheit}° fahrenheit`
+                                ? dictionary.forecast.current["feels-like-temperature"] + `${data.feelsLikeCelsius}° celsius`
+                                : dictionary.forecast.current["feels-like-temperature"] + `${data.feelsLikeFahrenheit}° fahrenheit`
                         }
                     </Typography>
                 </Box>
@@ -93,12 +80,12 @@ export default function CurrentWeatherData({
                 <Box gridRow="4/5">
                     <Typography>
                         {
-                            dictionary.forecast.current.pressure + pressure + "hPa"
+                            dictionary.forecast.current.pressure + data.pressure + "hPa"
                         }
                     </Typography>
                     <Typography>
                         {
-                            dictionary.forecast.current.humidity + humidity + "%"
+                            dictionary.forecast.current.humidity + data.humidity + "%"
                         }
                     </Typography>
                 </Box>
@@ -106,12 +93,12 @@ export default function CurrentWeatherData({
                 <Box gridRow="5/6">
                     <Typography>
                         {
-                            dictionary.forecast.current["wind-speed"] + windSpeed + "Km/h"
+                            dictionary.forecast.current["wind-speed"] + data.windSpeed + "Km/h"
                         }
                     </Typography>
                     <Typography>
                         {
-                            dictionary.forecast.current["wind-direction"] + windDirection
+                            dictionary.forecast.current["wind-direction"] + data.windDirection
                         }
                     </Typography>
                 </Box>
@@ -119,7 +106,7 @@ export default function CurrentWeatherData({
                 <Box gridRow="6/7">
                     <Typography>
                         {
-                            `${dictionary.forecast.current.sunrise}${sunrise} | ${dictionary.forecast.current.sunset}${sunset}`
+                            `${dictionary.forecast.current.sunrise}${data.sunrise} | ${dictionary.forecast.current.sunset}${data.sunset}`
                         }
                     </Typography>
                 </Box>
