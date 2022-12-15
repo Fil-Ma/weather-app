@@ -57,6 +57,24 @@
                 "moonset": "Tramonto Luna",
                 "moonphase": "Fase Luna"
             }
+        },
+        "hourly": {
+            "title": "Bollettino orario",
+            "row-labels": {
+                "image": "",
+                "description": "Tempo",
+                "precipitationProbability": "Precipitazioni (%)",
+                "rain": "Pioggia (mm)",
+                "snow": "Neve (mm)",
+                "temperatureCelsius": "Temperatura °C",
+                "feelsLikeCelsius": "Percepita °C",
+                "temperatureFahrenheit": "Temperatura °F",
+                "feelsLikeFahrenheit": "Percepita °F",
+                "pressure": "Pressione (hPa)",
+                "humidity": "Umidità (%)",
+                "windSpeed": "Velocità vento (Km/h)",
+                "windDirection": "Direzione vento"
+            }
         }
     }
 }

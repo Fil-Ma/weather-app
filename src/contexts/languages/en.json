@@ -57,6 +57,24 @@
                 "moonset": "Moonset time",
                 "moonphase": "Moon phase"
             }
+        },
+        "hourly": {
+            "title": "Hourly Forecast",
+            "row-labels": {
+                "image": "",
+                "description": "Weather",
+                "precipitationProbability": "Precipitation (%)",
+                "rain": "Rain (mm)",
+                "snow": "Snow (mm)",
+                "temperatureCelsius": "Temperature °C",
+                "feelsLikeCelsius": "Feels like °C",
+                "temperatureFahrenheit": "Temperature °F",
+                "feelsLikeFahrenheit": "Feels like °F",
+                "pressure": "Pressure (hPa)",
+                "humidity": "Humidity (%)",
+                "windSpeed": "Wind speed (Km/h)",
+                "windDirection": "Wind direction"
+            }
         }
     }
     
