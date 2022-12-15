@@ -28,7 +28,7 @@ export default function DailyForecastTable({ dailyData }) {
                 border: "1px solid rgba(0,0,0,0.3)",
                 p: "1rem 2rem"
             }}>
-                <Typography component="h2">Daily Forecast</Typography>
+                <Typography component="h2">{dictionary.forecast.daily.title}</Typography>
                 <TableContainer sx={{ mt: "2rem" }}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
