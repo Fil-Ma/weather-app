@@ -31,7 +31,12 @@ export default function HourlyForecast({ hourlyData }) {
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>
-                                <TableCell sx={{ backgroundColor: "primary.main", color: "primary.contrastText" }}>
+                                <TableCell 
+                                    sx={{ 
+                                        backgroundColor: "primary.main", 
+                                        color: "primary.contrastText",
+                                        zIndex: 3 
+                                    }}>
 
                                 </TableCell>
                                 {
@@ -41,6 +46,8 @@ export default function HourlyForecast({ hourlyData }) {
                                                 align="center" 
                                                 key={index} 
                                                 sx={{ 
+                                                    width: "max-content",
+                                                    whiteSpace: "nowrap",
                                                     backgroundColor: "primary.main", 
                                                     color: "#FFF"
                                                 }}>
