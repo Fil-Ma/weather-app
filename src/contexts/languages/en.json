@@ -1,6 +1,6 @@
 {
     "header": {
-        "title": "This is a header",
+        "title": "WeatherApp",
         "language-icon-hover": "Change Language",
         "theme-icon-hover": "Change Theme",
         "dialog-title": "Select the language:",
