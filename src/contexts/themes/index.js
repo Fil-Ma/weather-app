@@ -11,6 +11,12 @@ export const lightTheme = createTheme({
             default: '#eeffee',
             paper: '#fff'
         },
+    },
+    typography: {
+        fontFamily: [
+            'Open Sans',
+            'sans-serif'
+        ]
     }
 });
 
@@ -25,5 +31,11 @@ export const darkTheme = createTheme({
             default: '#303030',
             paper: '#424242'
         },
+    },
+    typography: {
+        fontFamily: [
+            'Open Sans',
+            'sans-serif'
+        ]
     }
 });
