@@ -123,19 +123,30 @@ export default function Header() {
                 </Dialog>
 
                 <Tooltip title={dictionary.header["language-icon-hover"]} arrow={true}>
-                    <IconButton onClick={handleOpenLanguageDialog}>
-                        <LanguageIcon />
-                    </IconButton>
+                    <Button 
+                        onClick={handleOpenLanguageDialog} 
+                        sx={{ 
+                            color: "headerButton.main", 
+                            fontWeight: "bold" 
+                        }}>
+                            Language {<LanguageIcon sx={{ ml: "0.5rem" }} />}
+                    </Button>
                 </Tooltip>
 
                 <Tooltip title={dictionary.header["theme-icon-hover"]} arrow={true}>
-                    <IconButton onClick={toggleTheme}>
-                        { 
-                            theme === "light"
-                                ? <DarkModeIcon />
-                                : <LightModeIcon />
-                        }
-                    </IconButton>
+                    <Button 
+                        onClick={toggleTheme} 
+                        sx={{ 
+                            color: "headerButton.main", 
+                            fontWeight: "bold",
+                            ml: "1rem" 
+                        }}>
+                            Theme { 
+                                theme === "light"
+                                    ? <DarkModeIcon sx={{ ml: "0.5rem" }} />
+                                    : <LightModeIcon sx={{ ml: "0.5rem" }} />
+                            }
+                    </Button>
                 </Tooltip>
             </Toolbar>
         </AppBar>

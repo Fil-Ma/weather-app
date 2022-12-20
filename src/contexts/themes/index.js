@@ -7,6 +7,9 @@ export const lightTheme = createTheme({
             main: '#43a047',
             contrastText: '#000'
         },
+        headerButton: {
+            main: 'rgba(0, 0, 0, 0.54)'
+        },
         background: {
             default: '#eeffee',
             paper: '#fff'
@@ -16,7 +19,7 @@ export const lightTheme = createTheme({
         fontFamily: [
             'Open Sans',
             'sans-serif'
-        ]
+        ].join(',')
     }
 });
 
@@ -27,6 +30,9 @@ export const darkTheme = createTheme({
             main: "#66bb6a",
             contrastText: '#FFF'
         },
+        positionHoverButton: {
+            main: ''
+        },
         background: {
             default: '#303030',
             paper: '#424242'
@@ -36,6 +42,6 @@ export const darkTheme = createTheme({
         fontFamily: [
             'Open Sans',
             'sans-serif'
-        ]
+        ].join(',')
     }
 });
