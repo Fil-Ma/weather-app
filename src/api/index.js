@@ -7,11 +7,11 @@ const OPENWEATHER_API_KEY = process.env.OPENWEATHER_API_KEY;
  * https://api.openweathermap.org/data/3.0/onecall?lat=
 //  {lat}&lon={lon}&exclude={part}&appid={API key}
  * 
- * @param {Object} city | latitude and longitude
- * @param {String} units  | standard, metric, imperial
- * @param {String} exclude | current, minutely, hourly, daily, alerts
+ * @param {Object} city
+ * @param {String} units
+ * @param {String} exclude
  * @param {String} lang
- * @returns {Object|Error} returns data retrieved from api
+ * @returns {Object|Error}
  */
 export async function retrieveWeatherData(city, dataUnits, lang) {
     try {
