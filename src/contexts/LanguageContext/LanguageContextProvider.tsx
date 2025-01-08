@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useState } from "react";
 import { dictionaryList } from "./languages";
-import { ILanguageContext, TUserLanguage } from "./types";
+import { ChangeUserLanguage, ILanguageContext, TUserLanguage } from "./types";
 
 const LanguageContext = createContext<ILanguageContext>({
   language: "en",
@@ -28,14 +28,11 @@ export default function LanguageContextProvider({
   const [userLanguage, setUserLanguage] =
     useState<TUserLanguage>(getLocalLanguage);
 
-  const changeLanguage = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const newLanguage = event.target.value as TUserLanguage;
-      setUserLanguage(newLanguage);
-      localStorage.setItem("language", newLanguage);
-    },
-    []
-  );
+  const changeLanguage: ChangeUserLanguage = useCallback((event) => {
+    const newLanguage = event.target.value as TUserLanguage;
+    setUserLanguage(newLanguage);
+    localStorage.setItem("language", newLanguage);
+  }, []);
 
   const provider: ILanguageContext = {
     language: userLanguage,
