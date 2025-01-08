@@ -4,7 +4,7 @@ import { Autocomplete, TextField, Box, Typography, Grid } from "@mui/material";
 import parse from "autosuggest-highlight/parse";
 import throttle from "lodash/throttle";
 
-// import LocationOnIcon from "@mui/icons-material/LocationOn";
+import LocationIcon from "@assets/icons/map-pin.svg?react";
 import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
 
 // google api basic data
@@ -153,7 +153,7 @@ export default function SearchBar() {
               <Grid container alignItems="center">
                 <Grid item>
                   <Box
-                    // component={LocationOnIcon}
+                    component={LocationIcon}
                     sx={{ color: "text.secondary", mr: 2 }}
                   />
                 </Grid>

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   AppBar,
   Typography,
-  IconButton,
   Button,
   Box,
   Dialog,
@@ -18,9 +17,9 @@ import {
   Tooltip,
 } from "@mui/material";
 
-// import LightModeIcon from "@mui/icons-material/LightMode";
-// import DarkModeIcon from "@mui/icons-material/DarkMode";
-// import LanguageIcon from "@mui/icons-material/Language";
+import LanguageIcon from "@assets/icons/language.svg?react";
+import LightModeIcon from "@assets/icons/sun.svg?react";
+import DarkModeIcon from "@assets/icons/moon.svg?react";
 
 import { useThemeContext } from "@contexts/ThemeContext/ThemeContextProvider";
 import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
@@ -127,7 +126,7 @@ export default function Header() {
               fontWeight: "bold",
             }}
           >
-            {/* Language {<LanguageIcon sx={{ ml: "0.5rem" }} />} */}L
+            <LanguageIcon />
           </Button>
         </Tooltip>
 
@@ -140,12 +139,7 @@ export default function Header() {
               ml: "1rem",
             }}
           >
-            Theme{" "}
-            {/* {theme === "light" ? (
-              <DarkModeIcon sx={{ ml: "0.5rem" }} />
-            ) : (
-              <LightModeIcon sx={{ ml: "0.5rem" }} />
-            )} */}
+            {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
           </Button>
         </Tooltip>
       </Toolbar>

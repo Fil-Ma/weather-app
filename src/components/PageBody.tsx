@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import Box from "@mui/material/Box";
 import SearchBar from "./SearchBar";
 import ForecastContainer from "./ForecastContainer";

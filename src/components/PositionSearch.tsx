@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
 import React from "react";
-// import LocationOnIcon from "@mui/icons-material/LocationOn";
+import LocationIcon from "@assets/icons/map-pin.svg?react";
 
 export default function PositionSearch({
   hasGeolocation,
@@ -24,8 +24,7 @@ export default function PositionSearch({
           }}
           onClick={handleGeopositionSearch}
         >
-          {/* <LocationOnIcon /> */}
-          {dictionary.search.position["button-text"]}
+          <LocationIcon /> {dictionary.search.position["button-text"]}
         </Button>
       )}
     </Box>

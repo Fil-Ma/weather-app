@@ -1,11 +1,9 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
-
-// import CopyrightIcon from "@mui/icons-material/Copyright";
-// import TwitterIcon from "@mui/icons-material/Twitter";
-// import InstagramIcon from "@mui/icons-material/Instagram";
-// import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@assets/icons/twitter.svg?react";
+import InstagramIcon from "@assets/icons/instagram.svg?react";
+import FacebookIcon from "@assets/icons/facebook.svg?react";
 
 // footer style
 const footerStyle = {
@@ -32,22 +30,19 @@ const socialLinkStyle = {
 export default function Footer() {
   return (
     <Box component="footer" sx={footerStyle}>
-      <Typography>
-        {/* <CopyrightIcon sx={{ fontSize: "medium" }} /> */}
-        All right reserved
-      </Typography>
+      <Typography>&#169; All right reserved</Typography>
 
       <Box className="social-container">
         <Link href="#" underline="none" sx={socialLinkStyle}>
-          {/* <TwitterIcon /> */}
+          <TwitterIcon />
         </Link>
 
         <Link href="#" underline="none" sx={socialLinkStyle}>
-          {/* <InstagramIcon /> */}
+          <InstagramIcon />
         </Link>
 
         <Link href="#" underline="none" sx={socialLinkStyle}>
-          {/* <FacebookIcon /> */}
+          <FacebookIcon />
         </Link>
       </Box>
     </Box>
