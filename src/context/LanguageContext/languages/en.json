@@ -1,0 +1,80 @@
+{
+  "header": {
+    "title": "WeatherApp",
+    "language-icon-hover": "Change Language",
+    "theme-icon-hover": "Change Theme",
+    "dialog-title": "Select the language:",
+    "dialog-input-label": "Language",
+    "dialog-cancel": "Cancel",
+    "dialog-accept": "Confirm"
+  },
+  "search": {
+    "search-bar": {
+      "title": "Enter the name of the city you want to see the forecast for:",
+      "autocomplete-placeholder": "Add a location"
+    },
+    "position": {
+      "button-text": "use position"
+    }
+  },
+  "forecast": {
+    "container": {
+      "no-data-message": "No data available"
+    },
+    "current": {
+      "status": {
+        "location": "Location",
+        "description": "Current status"
+      },
+      "temperature": "Measured temperature: ",
+      "feels-like-temperature": "Feels like: ",
+      "pressure": "Pressure is: ",
+      "humidity": "Humidity is: ",
+      "wind-speed": "Wind speed is: ",
+      "wind-direction": "Wind direction is: ",
+      "sunset": "Sunrise at: ",
+      "sunrise": "Sunset at: "
+    },
+    "daily": {
+      "title": "Daily Forecast",
+      "row-labels": {
+        "image": "",
+        "description": "Weather",
+        "precipitationProbability": "Precipitation (%)",
+        "rain": "Rain (mm)",
+        "snow": "Snow (mm)",
+        "temperatureCelsius": "Temperature (min|max) °C",
+        "feelsLikeCelsius": "Feels like (min|max) °C",
+        "temperatureFahrenheit": "Temperature (min|max) °F",
+        "feelsLikeFahrenheit": "Feels like (min|max) °F",
+        "pressure": "Pressure (hPa)",
+        "humidity": "Humidity (%)",
+        "windSpeed": "Wind speed (Km/h)",
+        "windDirection": "Wind direction",
+        "sunrise": "Sunrise time",
+        "sunset": "Sunset time",
+        "moonrise": "Moonrise time",
+        "moonset": "Moonset time",
+        "moonphase": "Moon phase"
+      }
+    },
+    "hourly": {
+      "title": "Hourly Forecast",
+      "row-labels": {
+        "image": "",
+        "description": "Weather",
+        "precipitationProbability": "Precipitation (%)",
+        "rain": "Rain (mm)",
+        "snow": "Snow (mm)",
+        "temperatureCelsius": "Temperature °C",
+        "feelsLikeCelsius": "Feels like °C",
+        "temperatureFahrenheit": "Temperature °F",
+        "feelsLikeFahrenheit": "Feels like °F",
+        "pressure": "Pressure (hPa)",
+        "humidity": "Humidity (%)",
+        "windSpeed": "Wind speed (Km/h)",
+        "windDirection": "Wind direction"
+      }
+    }
+  }
+}

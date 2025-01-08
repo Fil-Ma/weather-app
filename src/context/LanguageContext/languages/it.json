@@ -1,0 +1,80 @@
+{
+  "header": {
+    "title": "WeatherApp",
+    "language-icon-hover": "Cambia Lingua",
+    "theme-icon-hover": "Cambia tema",
+    "dialog-title": "Seleziona la lingua:",
+    "dialog-input-label": "Lingua",
+    "dialog-cancel": "Annulla",
+    "dialog-accept": "Conferma"
+  },
+  "search": {
+    "search-bar": {
+      "title": "Inserisci il nome della città per cui vedere il bollettino meteo:",
+      "autocomplete-placeholder": "Aggiungi una località"
+    },
+    "position": {
+      "button-text": "usa posizione"
+    }
+  },
+  "forecast": {
+    "container": {
+      "no-data-message": "Nessun dato disponibile"
+    },
+    "current": {
+      "status": {
+        "location": "Posizione",
+        "description": "Situazione corrente"
+      },
+      "temperature": "Temperatura misurata: ",
+      "feels-like-temperature": "Temperatura percepita: ",
+      "pressure": "Pressione: ",
+      "humidity": "Umidità: ",
+      "wind-speed": "Velocità del vento: ",
+      "wind-direction": "Direzione del vento: ",
+      "sunset": "Tramonto: ",
+      "sunrise": "Alba: "
+    },
+    "daily": {
+      "title": "Bollettino giornaliero",
+      "row-labels": {
+        "image": "",
+        "description": "Tempo",
+        "precipitationProbability": "Precipitazioni (%)",
+        "rain": "Pioggia (mm)",
+        "snow": "Neve (mm)",
+        "temperatureCelsius": "Temperatura (min|max) °C",
+        "feelsLikeCelsius": "Percepita (min|max) °C",
+        "temperatureFahrenheit": "Temperatura (min|max) °F",
+        "feelsLikeFahrenheit": "Percepita (min|max) °F",
+        "pressure": "Pressione (hPa)",
+        "humidity": "Umidità (%)",
+        "windSpeed": "Velocità vento (Km/h)",
+        "windDirection": "Direzione vento",
+        "sunrise": "Alba Sole",
+        "sunset": "Tramonto Sole",
+        "moonrise": "Alba Luna",
+        "moonset": "Tramonto Luna",
+        "moonphase": "Fase Luna"
+      }
+    },
+    "hourly": {
+      "title": "Bollettino orario",
+      "row-labels": {
+        "image": "",
+        "description": "Tempo",
+        "precipitationProbability": "Precipitazioni (%)",
+        "rain": "Pioggia (mm)",
+        "snow": "Neve (mm)",
+        "temperatureCelsius": "Temperatura °C",
+        "feelsLikeCelsius": "Percepita °C",
+        "temperatureFahrenheit": "Temperatura °F",
+        "feelsLikeFahrenheit": "Percepita °F",
+        "pressure": "Pressione (hPa)",
+        "humidity": "Umidità (%)",
+        "windSpeed": "Velocità vento (Km/h)",
+        "windDirection": "Direzione vento"
+      }
+    }
+  }
+}
