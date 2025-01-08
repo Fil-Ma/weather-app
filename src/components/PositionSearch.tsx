@@ -3,13 +3,12 @@ import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextPro
 import React from "react";
 import LocationIcon from "@assets/icons/map-pin.svg?react";
 
-export default function PositionSearch({
-  hasGeolocation,
-  handleGeopositionSearch,
-}: {
+type Props = {
   hasGeolocation: boolean;
   handleGeopositionSearch: (event: React.MouseEvent<HTMLButtonElement>) => void;
-}) {
+};
+
+function PositionSearch({ hasGeolocation, handleGeopositionSearch }: Props) {
   const { dictionary } = useLanguageContext();
 
   return (
@@ -30,3 +29,5 @@ export default function PositionSearch({
     </Box>
   );
 }
+
+export default PositionSearch;

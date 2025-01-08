@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
 
-export default function NoData() {
+function DataEmptyState() {
   const { dictionary } = useLanguageContext();
 
   return (
@@ -18,3 +18,5 @@ export default function NoData() {
     </Box>
   );
 }
+
+export default DataEmptyState;

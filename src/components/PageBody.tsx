@@ -1,54 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import SearchBar from "./SearchBar";
-import ForecastContainer from "./ForecastContainer";
-import { retrieveWeatherData } from "../api";
+import CurrentForecast from "./CurrentForecast";
+import DailyForecastTable from "./DailyForecastTable";
+import HourlyForecast from "./HourlyForecast";
+import DataEmptyState from "./DataEmptyState";
 import PositionSearch from "./PositionSearch";
+import useWeatherData from "@hooks/useWeatherData";
+import { Typography } from "@mui/material";
+import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
 
 export default function PageBody() {
-  // API response
-  const [weatherData, setWeatherData] = useState<any>(null);
-  // store data for the API request
-  const [latitude, setLatitude] = useState<number | null>(null);
-  const [longitude, setLongitude] = useState<number | null>(null);
+  const { fetchWeatherData, weatherData } = useWeatherData();
+  const { dictionary } = useLanguageContext();
 
   const hasGeolocation = navigator.geolocation ? true : false;
 
-  // automatically load position from browser
-  useEffect(() => {
-    let isLoadingPosition = true;
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setLatitude(position.coords.latitude);
-        setLongitude(position.coords.longitude);
-      });
-    }
-
-    return () => {
-      isLoadingPosition = false;
-    };
-  }, []);
-
-  // handle form submit
   async function handleSearchSubmit(
     event: React.MouseEvent<HTMLButtonElement>
   ) {
     event.preventDefault();
-    try {
-      // retrieve weather data based on coordinates
-      const data = await retrieveWeatherData(
-        {
-          latitude: latitude,
-          longitude: longitude,
-        },
-        "standard",
-        "en"
-      );
-      setWeatherData(data);
-      console.log("weather data response", data);
-    } catch (err) {
-      console.log(err);
-    }
+    await fetchWeatherData();
   }
 
   return (
@@ -59,21 +31,47 @@ export default function PageBody() {
           width: "70%",
           mb: "4rem",
           mx: "auto",
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
         }}
       >
-        <SearchBar />
-
-        <PositionSearch
-          hasGeolocation={hasGeolocation}
-          handleGeopositionSearch={handleSearchSubmit}
-        />
+        <Typography sx={{ color: "primary.contrastText" }}>
+          {dictionary.search["search-bar"].title}
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginTop: "12px",
+          }}
+        >
+          <SearchBar />
+          <PositionSearch
+            hasGeolocation={hasGeolocation}
+            handleGeopositionSearch={handleSearchSubmit}
+          />
+        </Box>
       </Box>
 
-      <ForecastContainer weatherData={weatherData} />
+      <Box component="section" sx={{ position: "relative" }}>
+        {/* message to display if no location has been entered */}
+        {!weatherData && <DataEmptyState />}
+
+        {/* current forecast */}
+        {weatherData?.current && (
+          <CurrentForecast currentData={weatherData.current} />
+        )}
+
+        {/* daily forecast */}
+        {weatherData?.daily && (
+          <DailyForecastTable dailyData={weatherData.daily.slice(0, 6)} />
+        )}
+
+        {/* hourly forecast */}
+        {weatherData?.hourly && (
+          <HourlyForecast hourlyData={weatherData.hourly.slice(0, 24)} />
+        )}
+      </Box>
     </Box>
   );
 }

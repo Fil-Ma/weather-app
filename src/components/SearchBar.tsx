@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 
 import { Autocomplete, TextField, Box, Typography, Grid } from "@mui/material";
 import parse from "autosuggest-highlight/parse";
@@ -100,14 +100,9 @@ export default function SearchBar() {
 
   return (
     <Box className="search-bar" sx={{ width: "70%" }}>
-      <Typography sx={{ color: "primary.contrastText" }}>
-        {dictionary.search["search-bar"].title}
-      </Typography>
-
       <Autocomplete
         id="autocomplete-input"
         sx={{
-          mt: "1.5rem",
           borderColor: "primary.contrastText",
         }}
         autoComplete

@@ -24,6 +24,21 @@ const socialLinkStyle = {
   color: "primary.contrastText",
 };
 
+const socialLinks = [
+  {
+    url: "#",
+    Icon: TwitterIcon,
+  },
+  {
+    url: "#",
+    Icon: InstagramIcon,
+  },
+  {
+    url: "#",
+    Icon: FacebookIcon,
+  },
+];
+
 /*
     HEADER COMPONENT
 */
@@ -33,17 +48,11 @@ export default function Footer() {
       <Typography>&#169; All right reserved</Typography>
 
       <Box className="social-container">
-        <Link href="#" underline="none" sx={socialLinkStyle}>
-          <TwitterIcon />
-        </Link>
-
-        <Link href="#" underline="none" sx={socialLinkStyle}>
-          <InstagramIcon />
-        </Link>
-
-        <Link href="#" underline="none" sx={socialLinkStyle}>
-          <FacebookIcon />
-        </Link>
+        {socialLinks.map(({ url, Icon }, index) => (
+          <Link key={index} href={url} underline="none" sx={socialLinkStyle}>
+            <Icon />
+          </Link>
+        ))}
       </Box>
     </Box>
   );
