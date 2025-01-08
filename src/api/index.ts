@@ -2,6 +2,8 @@
 const OPENWEATHER_API_URL = import.meta.env.VITE_OPENWEATHER_API_URL;
 const OPENWEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
+type TCity = Record<"latitude" | "longitude", number | null>;
+
 /**
  * retrieve data for a specified city
  * https://api.openweathermap.org/data/3.0/onecall?lat=
@@ -13,7 +15,11 @@ const OPENWEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
  * @param {String} lang
  * @returns {Object|Error}
  */
-export async function retrieveWeatherData(city, dataUnits, lang) {
+export async function retrieveWeatherData(
+  city: TCity,
+  dataUnits: string,
+  lang: string
+) {
   try {
     const { latitude, longitude } = city;
 
@@ -26,10 +32,10 @@ export async function retrieveWeatherData(city, dataUnits, lang) {
     const urlToFetch = `${OPENWEATHER_API_URL}lat=${latitude}&lon=${longitude}&exclude=minutely&appid=${OPENWEATHER_API_KEY}`;
 
     const response = await fetch(urlToFetch);
-
     const data = await response.json();
     return data;
   } catch (error) {
-    throw new Error(error);
+    // throw new Error(error);
+    console.log(error);
   }
 }

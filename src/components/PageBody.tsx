@@ -3,18 +3,16 @@ import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import SearchBar from "./SearchBar";
 import ForecastContainer from "./ForecastContainer";
-
-import { useLanguageContext } from "../contexts/LanguageContext";
 import { retrieveWeatherData } from "../api";
 import PositionSearch from "./PositionSearch";
 
 export default function PageBody() {
   // API response
-  const [weatherData, setWeatherData] = useState(null);
+  const [weatherData, setWeatherData] = useState<any>(null);
   // store data for the API request
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
-  // const { language } = useLanguageContext();
+  const [latitude, setLatitude] = useState<number | null>(null);
+  const [longitude, setLongitude] = useState<number | null>(null);
+
   const hasGeolocation = navigator.geolocation ? true : false;
 
   // automatically load position from browser
@@ -33,7 +31,9 @@ export default function PageBody() {
   }, []);
 
   // handle form submit
-  async function handleSearchSubmit(event) {
+  async function handleSearchSubmit(
+    event: React.MouseEvent<HTMLButtonElement>
+  ) {
     event.preventDefault();
     try {
       // retrieve weather data based on coordinates
@@ -43,7 +43,7 @@ export default function PageBody() {
           longitude: longitude,
         },
         "standard",
-        "en",
+        "en"
       );
       setWeatherData(data);
       console.log("weather data response", data);

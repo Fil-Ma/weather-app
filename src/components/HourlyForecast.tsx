@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Box,
   Typography,
@@ -9,10 +8,10 @@ import {
   TableRow,
   TableCell,
 } from "@mui/material";
-import { useLanguageContext } from "../contexts/LanguageContext";
+import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
 import { createHourlyTableData } from "../utils/tableOperations";
 
-export default function HourlyForecast({ hourlyData }) {
+export default function HourlyForecast({ hourlyData }: { hourlyData: any }) {
   const { language, dictionary } = useLanguageContext();
   const { columnLabels, rows } = createHourlyTableData(hourlyData, language);
 
@@ -58,7 +57,7 @@ export default function HourlyForecast({ hourlyData }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {Object.keys(rows).map((rowKey, index) => {
+            {Object.entries(rows).map(([key, values], index) => {
               return (
                 <TableRow key={index}>
                   <TableCell
@@ -70,9 +69,9 @@ export default function HourlyForecast({ hourlyData }) {
                     }}
                     align="left"
                   >
-                    {dictionary.forecast.hourly["row-labels"][rowKey]}
+                    {dictionary.forecast.hourly["row-labels"][key]}
                   </TableCell>
-                  {rows[rowKey].map((element, index) => {
+                  {values.map((element, index) => {
                     return (
                       <TableCell
                         align="center"

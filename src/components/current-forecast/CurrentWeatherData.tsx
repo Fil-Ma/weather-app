@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Box, Typography, ButtonGroup, Button } from "@mui/material";
-import { useLanguageContext } from "../../contexts/LanguageContext";
+import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
 
-export default function CurrentWeatherData({ data }) {
+export default function CurrentWeatherData({ data }: { data: any }) {
   const [isTemperatureCelsius, setIsTemperatureCelsius] = useState(true);
   const { dictionary } = useLanguageContext();
 
-  function toggleTemperatureUnits(event) {
+  function toggleTemperatureUnits(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     if (isTemperatureCelsius) {
       setIsTemperatureCelsius(false);

@@ -1,4 +1,4 @@
-export function getWindDirection(windDegDirection) {
+export function getWindDirection(windDegDirection: number) {
   if (windDegDirection > 348.75 || windDegDirection <= 11.25) {
     return "N";
   } else if (windDegDirection > 11.25 && windDegDirection <= 33.75) {
@@ -34,7 +34,7 @@ export function getWindDirection(windDegDirection) {
   }
 }
 
-export function convertToKmh(windSpeed) {
+export function convertToKmh(windSpeed: number) {
   const speed = windSpeed * 3.6;
   return speed.toFixed(2);
 }

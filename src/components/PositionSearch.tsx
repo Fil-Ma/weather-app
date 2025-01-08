@@ -1,11 +1,14 @@
-import React from "react";
 import { Box, Button } from "@mui/material";
-import { useLanguageContext } from "../contexts/LanguageContext";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
+import React from "react";
+// import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 export default function PositionSearch({
   hasGeolocation,
   handleGeopositionSearch,
+}: {
+  hasGeolocation: boolean;
+  handleGeopositionSearch: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }) {
   const { dictionary } = useLanguageContext();
 
@@ -21,7 +24,8 @@ export default function PositionSearch({
           }}
           onClick={handleGeopositionSearch}
         >
-          <LocationOnIcon /> {dictionary.search.position["button-text"]}
+          {/* <LocationOnIcon /> */}
+          {dictionary.search.position["button-text"]}
         </Button>
       )}
     </Box>

@@ -1,8 +1,15 @@
-import React from "react";
 import { Box, Typography } from "@mui/material";
-import { useLanguageContext } from "../../contexts/LanguageContext";
+import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
 
-export default function CurrentStatus({ location, image, currentStatus }) {
+export default function CurrentStatus({
+  location,
+  image,
+  currentStatus,
+}: {
+  location: string;
+  image: string;
+  currentStatus: string;
+}) {
   const { dictionary } = useLanguageContext();
 
   return (

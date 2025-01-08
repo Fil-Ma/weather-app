@@ -1,5 +1,3 @@
-import React from "react";
-
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
@@ -35,20 +33,21 @@ export default function Footer() {
   return (
     <Box component="footer" sx={footerStyle}>
       <Typography>
-        <CopyrightIcon sx={{ fontSize: "medium" }} /> All right reserved
+        {/* <CopyrightIcon sx={{ fontSize: "medium" }} /> */}
+        All right reserved
       </Typography>
 
       <Box className="social-container">
         <Link href="#" underline="none" sx={socialLinkStyle}>
-          <TwitterIcon />
+          {/* <TwitterIcon /> */}
         </Link>
 
         <Link href="#" underline="none" sx={socialLinkStyle}>
-          <InstagramIcon />
+          {/* <InstagramIcon /> */}
         </Link>
 
         <Link href="#" underline="none" sx={socialLinkStyle}>
-          <FacebookIcon />
+          {/* <FacebookIcon /> */}
         </Link>
       </Box>
     </Box>

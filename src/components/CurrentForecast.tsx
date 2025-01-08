@@ -1,12 +1,11 @@
-import React from "react";
 import { Box } from "@mui/material";
 import CurrentStatus from "./current-forecast/CurrentStatus";
 import CurrentWeatherData from "./current-forecast/CurrentWeatherData";
 
-import { useLanguageContext } from "../contexts/LanguageContext";
+import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
 import { normalizeData } from "../utils/dataNormalization";
 
-export default function CurrentForecast({ currentData }) {
+export default function CurrentForecast({ currentData }: { currentData: any }) {
   const { language } = useLanguageContext();
   const normalizedData = normalizeData(currentData, language);
 

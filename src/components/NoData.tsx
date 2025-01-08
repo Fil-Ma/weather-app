@@ -1,6 +1,5 @@
-import React from "react";
 import { Box, Typography } from "@mui/material";
-import { useLanguageContext } from "../contexts/LanguageContext";
+import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
 
 export default function NoData() {
   const { dictionary } = useLanguageContext();

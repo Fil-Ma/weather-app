@@ -1,11 +1,14 @@
-import React from "react";
 import { Box } from "@mui/material";
 import CurrentForecast from "./CurrentForecast";
 import DailyForecastTable from "./DailyForecastTable";
 import HourlyForecast from "./HourlyForecast";
 import NoData from "./NoData";
 
-export default function ForecastContainer({ weatherData }) {
+export default function ForecastContainer({
+  weatherData,
+}: {
+  weatherData: any;
+}) {
   return (
     <Box component="section" sx={{ position: "relative" }}>
       {/* message to display if no location has been entered */}
