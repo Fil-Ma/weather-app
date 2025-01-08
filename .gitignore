@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# example notes 
+**-example.js
+examples/
+
+# misc
+*.env
+!example.env
