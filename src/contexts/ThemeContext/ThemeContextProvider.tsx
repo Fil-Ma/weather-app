@@ -8,7 +8,7 @@ import React, {
 import { ApplicationTheme, IThemeContext } from "./types";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { lightTheme, darkTheme } from "./themes";
+import { lightThemePalette, darkThemePalette } from "./themes";
 
 const ThemeContext = createContext<IThemeContext>({
   theme: "light",
@@ -40,10 +40,15 @@ export default function ThemeContextProvider({
       setTheme("light");
       localStorage.setItem("theme", "light");
     }
-  }, []);
+  }, [theme]);
 
   const muiTheme = useMemo(() => {
-    return createTheme(theme === "light" ? lightTheme : darkTheme);
+    return createTheme({
+      palette: theme === "light" ? lightThemePalette : darkThemePalette,
+      typography: {
+        fontFamily: ["Open Sans", "sans-serif"].join(","),
+      },
+    });
   }, [theme]);
 
   return (

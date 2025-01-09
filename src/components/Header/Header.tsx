@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { AppBar, Typography, Button, Toolbar, Tooltip } from "@mui/material";
+import {
+  AppBar,
+  Typography,
+  Button,
+  Toolbar,
+  Tooltip,
+  styled,
+} from "@mui/material";
 import { useThemeContext } from "@contexts/ThemeContext/ThemeContextProvider";
 import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
 import ChangeLanguageDialog from "./ChangeLanguageDialog";
@@ -7,20 +14,6 @@ import LanguageIcon from "@assets/icons/language.svg?react";
 import LightModeIcon from "@assets/icons/sun.svg?react";
 import DarkModeIcon from "@assets/icons/moon.svg?react";
 
-// component style
-const headerStyle = {
-  display: "flex",
-  position: "relative",
-  height: "4rem",
-  flexDirection: "row",
-  justifyContent: "space-between",
-  alignItems: "center",
-  px: "4rem",
-};
-
-/*
-    HEADER COMPONENT
-*/
 export default function Header() {
   const [isLanguageDialogOpen, setIsLanguageDialogOpen] = useState(false);
 
@@ -51,7 +44,7 @@ export default function Header() {
   ];
 
   return (
-    <AppBar sx={headerStyle}>
+    <CustomAppBar>
       <Typography sx={{ backgroundColor: "primary.main", color: "#FFF" }}>
         {dictionary.header.title}
       </Typography>
@@ -66,7 +59,7 @@ export default function Header() {
             <Button
               onClick={onClick}
               sx={{
-                color: "headerButton.main",
+                color: "primary.contrastText",
                 fontWeight: "bold",
               }}
             >
@@ -75,6 +68,20 @@ export default function Header() {
           </Tooltip>
         ))}
       </Toolbar>
-    </AppBar>
+    </CustomAppBar>
   );
 }
+
+const CustomAppBar = styled(AppBar)(({ theme }) => ({
+  display: "flex",
+  position: "relative",
+  height: "4rem",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  paddingInline: "4rem",
+
+  [theme.breakpoints.down("sm")]: {
+    paddingInline: "1rem",
+  },
+}));

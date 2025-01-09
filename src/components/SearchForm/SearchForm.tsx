@@ -111,7 +111,8 @@ const Form = styled("form")(({ theme }) => ({
 }));
 
 const Input = styled(TextField)(({ theme }) => ({
-  backgroundColor: "#FFF",
+  backgroundColor: theme.palette.background.paper,
+  color: theme.palette.primary.contrastText,
 
   [theme.breakpoints.up("sm")]: {
     minWidth: "400px",

@@ -1,39 +1,23 @@
-export const lightTheme = {
-  palette: {
-    type: "light",
-    primary: {
-      main: "#43a047",
-      contrastText: "#000",
-    },
-    headerButton: {
-      main: "rgba(0, 0, 0, 0.54)",
-    },
-    background: {
-      default: "#eeffee",
-      paper: "#fff",
-    },
+import { PaletteOptions } from "@mui/material";
+
+export const lightThemePalette: PaletteOptions = {
+  primary: {
+    main: "#43a047",
+    contrastText: "#000",
   },
-  typography: {
-    fontFamily: ["Open Sans", "sans-serif"].join(","),
+  background: {
+    default: "#eeffee",
+    paper: "#fff",
   },
 };
 
-export const darkTheme = {
-  palette: {
-    type: "dark",
-    primary: {
-      main: "#66bb6a",
-      contrastText: "#FFF",
-    },
-    positionHoverButton: {
-      main: "",
-    },
-    background: {
-      default: "#303030",
-      paper: "#424242",
-    },
+export const darkThemePalette: PaletteOptions = {
+  primary: {
+    main: "#66bb6a",
+    contrastText: "#FFF",
   },
-  typography: {
-    fontFamily: ["Open Sans", "sans-serif"].join(","),
+  background: {
+    default: "#303030",
+    paper: "#424242",
   },
 };
