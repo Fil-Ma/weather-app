@@ -9,11 +9,12 @@ import {
   TableCell,
 } from "@mui/material";
 import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
-import { createHourlyTableData } from "../utils/tableOperations";
+import { createHourlyTableData } from "@utils/tableOperations";
+import { THourlyForecast } from "../types";
 
-export default function HourlyForecast({ hourlyData }: { hourlyData: any }) {
+export default function HourlyForecast({ data }: { data: THourlyForecast[] }) {
   const { language, dictionary } = useLanguageContext();
-  const { columnLabels, rows } = createHourlyTableData(hourlyData, language);
+  const { columnLabels, rows } = createHourlyTableData(data, language);
 
   return (
     <Box

@@ -1,6 +1,13 @@
 import { getWindDirection, convertToKmh } from "./windOperations";
 import { dateToString } from "./dateOperations";
 import { kelvinToCelsius, kelvinToFahrenheit } from "./temperatureOperations";
+import { TUserLanguage } from "@contexts/LanguageContext/types";
+import { TCurrentForecast } from "@components/Forecast/types";
+
+type NormalizeData = (
+  dataObject: TCurrentForecast,
+  language: TUserLanguage
+) => any;
 
 /**
  * Normalizes datas from API
@@ -9,26 +16,18 @@ import { kelvinToCelsius, kelvinToFahrenheit } from "./temperatureOperations";
  * @param {String} language
  * @returns {Object} Normalized data
  */
-export function normalizeData(dataObject, language = "en") {
+export const normalizeData: NormalizeData = (dataObject, language = "en") => {
   // current date time
   const dateTime = dateToString(dataObject.dt, language);
 
   // current status
   const image = dataObject.weather[0].icon;
-  const description = dataObject.weather[0].description; // language
+  const description = dataObject.weather[0].description;
 
   // precipitation probability
   let precipitationProb = 0;
   if (dataObject?.pop) {
     precipitationProb = Math.round(dataObject.pop * 100);
-  }
-
-  // rain and snow volumes
-  let rain, snow;
-  if (dataObject?.rain) {
-    rain = dataObject.rain;
-  } else if (dataObject?.snow) {
-    snow = dataObject.snow;
   }
 
   // actual temperatures
@@ -81,8 +80,8 @@ export function normalizeData(dataObject, language = "en") {
     statusImage: image,
     statusDescription: description,
     precipitationProbability: precipitationProb,
-    rain,
-    snow,
+    rain: dataObject?.rain,
+    snow: dataObject?.snow,
     temperatureCelsius: temperature.tempC,
     temperatureFahrenheit: temperature.tempF,
     feelsLikeCelsius: feelsLike.tempC,
@@ -97,7 +96,7 @@ export function normalizeData(dataObject, language = "en") {
     moonset: moonsetDateTime.time,
     moonphase: dataObject.moon_phase,
   };
-}
+};
 
 /**
  * Normalizes datas from API | hourly data

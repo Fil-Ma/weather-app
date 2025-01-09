@@ -14,7 +14,7 @@
       "autocomplete-placeholder": "Aggiungi una località"
     },
     "position": {
-      "button-text": "usa posizione"
+      "button-text": "usa posizione corrente"
     }
   },
   "forecast": {

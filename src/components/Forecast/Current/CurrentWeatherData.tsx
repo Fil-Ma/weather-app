@@ -1,19 +1,40 @@
 import React, { useState } from "react";
 import { Box, Typography, ButtonGroup, Button } from "@mui/material";
 import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
+import { TCurrentForecast } from "../types";
+import { dateToString } from "@utils/dateOperations";
+import { convertToKmh, getWindDirection } from "@utils/windOperations";
+import {
+  kelvinToCelsius,
+  kelvinToFahrenheit,
+} from "@utils/temperatureOperations";
 
-export default function CurrentWeatherData({ data }: { data: any }) {
+export default function CurrentWeatherData({
+  data,
+}: {
+  data: TCurrentForecast;
+}) {
   const [isTemperatureCelsius, setIsTemperatureCelsius] = useState(true);
-  const { dictionary } = useLanguageContext();
+  const { dictionary, language } = useLanguageContext();
 
   function toggleTemperatureUnits(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
-    if (isTemperatureCelsius) {
-      setIsTemperatureCelsius(false);
-    } else {
-      setIsTemperatureCelsius(true);
-    }
+    setIsTemperatureCelsius(!isTemperatureCelsius);
   }
+
+  const { date, time } = dateToString(data.dt, language);
+  const windSpeed = convertToKmh(data.wind_speed);
+  const windDirection = getWindDirection(data.wind_deg);
+
+  const sunriseDateTime = dateToString(data.sunrise, language);
+  const sunsetDateTime = dateToString(data.sunset, language);
+
+  const temperature = isTemperatureCelsius
+    ? kelvinToCelsius(data.temp)
+    : kelvinToFahrenheit(data.temp);
+  const feels_like = isTemperatureCelsius
+    ? kelvinToCelsius(data.feels_like)
+    : kelvinToFahrenheit(data.feels_like);
 
   return (
     <Box
@@ -31,7 +52,7 @@ export default function CurrentWeatherData({ data }: { data: any }) {
     >
       <Box gridRow="1">
         <Typography>
-          {data.date} | {data.time}
+          {date} | {time}
         </Typography>
       </Box>
 
@@ -63,18 +84,14 @@ export default function CurrentWeatherData({ data }: { data: any }) {
           </Button>
         </ButtonGroup>
         <Typography>
-          {isTemperatureCelsius
-            ? dictionary.forecast.current.temperature +
-              `${data.temperatureCelsius}° celsius`
-            : dictionary.forecast.current.temperature +
-              `${data.temperatureFahrenheit}° fahrenheit`}
+          {`${dictionary.forecast.current.temperature} ${temperature}° ${
+            isTemperatureCelsius ? "celsius" : "fahrenheit"
+          }`}
         </Typography>
         <Typography>
-          {isTemperatureCelsius
-            ? dictionary.forecast.current["feels-like-temperature"] +
-              `${data.feelsLikeCelsius}° celsius`
-            : dictionary.forecast.current["feels-like-temperature"] +
-              `${data.feelsLikeFahrenheit}° fahrenheit`}
+          {`${
+            dictionary.forecast.current["feels-like-temperature"]
+          } ${feels_like}° ${isTemperatureCelsius ? "celsius" : "fahrenheit"}`}
         </Typography>
       </Box>
 
@@ -89,16 +106,16 @@ export default function CurrentWeatherData({ data }: { data: any }) {
 
       <Box gridRow="5/6">
         <Typography>
-          {dictionary.forecast.current["wind-speed"] + data.windSpeed + "Km/h"}
+          {dictionary.forecast.current["wind-speed"] + windSpeed + "Km/h"}
         </Typography>
         <Typography>
-          {dictionary.forecast.current["wind-direction"] + data.windDirection}
+          {dictionary.forecast.current["wind-direction"] + windDirection}
         </Typography>
       </Box>
 
       <Box gridRow="6/7">
         <Typography>
-          {`${dictionary.forecast.current.sunrise}${data.sunrise} | ${dictionary.forecast.current.sunset}${data.sunset}`}
+          {`${dictionary.forecast.current.sunrise}${sunriseDateTime.time} | ${dictionary.forecast.current.sunset}${sunsetDateTime.time}`}
         </Typography>
       </Box>
     </Box>

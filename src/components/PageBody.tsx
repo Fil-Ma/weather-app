@@ -1,77 +1,50 @@
-import React from "react";
 import Box from "@mui/material/Box";
-import SearchBar from "./SearchBar";
-import CurrentForecast from "./CurrentForecast";
-import DailyForecastTable from "./DailyForecastTable";
-import HourlyForecast from "./HourlyForecast";
+import CurrentForecast from "./Forecast/Current/CurrentForecast";
+import DailyForecastTable from "./Forecast/Daily/DailyForecastTable";
+import HourlyForecast from "./Forecast/Hourly/HourlyForecast";
 import DataEmptyState from "./DataEmptyState";
-import PositionSearch from "./PositionSearch";
 import useWeatherData from "@hooks/useWeatherData";
-import { Typography } from "@mui/material";
-import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
+import SearchForm from "./SearchForm/SearchForm";
+import { styled } from "@mui/material";
 
 export default function PageBody() {
   const { fetchWeatherData, weatherData } = useWeatherData();
-  const { dictionary } = useLanguageContext();
-
-  const hasGeolocation = navigator.geolocation ? true : false;
-
-  async function handleSearchSubmit(
-    event: React.MouseEvent<HTMLButtonElement>
-  ) {
-    event.preventDefault();
-    await fetchWeatherData();
-  }
 
   return (
-    <Box component="main" sx={{ py: "2rem", px: "4rem" }}>
-      <Box
-        component="section"
-        sx={{
-          width: "70%",
-          mb: "4rem",
-          mx: "auto",
-        }}
-      >
-        <Typography sx={{ color: "primary.contrastText" }}>
-          {dictionary.search["search-bar"].title}
-        </Typography>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginTop: "12px",
-          }}
-        >
-          <SearchBar />
-          <PositionSearch
-            hasGeolocation={hasGeolocation}
-            handleGeopositionSearch={handleSearchSubmit}
-          />
-        </Box>
-      </Box>
+    <Main>
+      <SearchForm onSubmit={fetchWeatherData} />
 
       <Box component="section" sx={{ position: "relative" }}>
         {/* message to display if no location has been entered */}
         {!weatherData && <DataEmptyState />}
 
         {/* current forecast */}
-        {weatherData?.current && (
-          <CurrentForecast currentData={weatherData.current} />
+        {weatherData?.currentForcast && (
+          <CurrentForecast
+            location={weatherData.location}
+            data={weatherData.currentForcast}
+          />
         )}
 
         {/* daily forecast */}
-        {weatherData?.daily && (
-          <DailyForecastTable dailyData={weatherData.daily.slice(0, 6)} />
+        {weatherData?.dailyForecast && (
+          <DailyForecastTable data={weatherData.dailyForecast.slice(0, 6)} />
         )}
 
         {/* hourly forecast */}
-        {weatherData?.hourly && (
-          <HourlyForecast hourlyData={weatherData.hourly.slice(0, 24)} />
+        {weatherData?.hourlyForecast && (
+          <HourlyForecast data={weatherData.hourlyForecast.slice(0, 24)} />
         )}
       </Box>
-    </Box>
+    </Main>
   );
 }
+
+const Main = styled("main")(({ theme }) => ({
+  paddingBlock: "2rem",
+  paddingInline: "4rem",
+
+  [theme.breakpoints.down("sm")]: {
+    paddingInline: "1rem",
+  },
+}));

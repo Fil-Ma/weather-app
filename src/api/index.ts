@@ -15,11 +15,7 @@ type TCity = Record<"latitude" | "longitude", number | null>;
  * @param {String} lang
  * @returns {Object|Error}
  */
-export async function retrieveWeatherData(
-  city: TCity,
-  dataUnits: string,
-  lang: string
-) {
+export async function retrieveWeatherData(city: TCity) {
   try {
     const { latitude, longitude } = city;
 
@@ -29,7 +25,36 @@ export async function retrieveWeatherData(
     }
 
     // set url for fetching data
-    const urlToFetch = `${OPENWEATHER_API_URL}lat=${latitude}&lon=${longitude}&exclude=minutely&appid=${OPENWEATHER_API_KEY}`;
+    const urlToFetch = `${OPENWEATHER_API_URL}/data/3.0/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely&appid=${OPENWEATHER_API_KEY}`;
+
+    const response = await fetch(urlToFetch);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    // throw new Error(error);
+    console.log(error);
+  }
+}
+
+/**
+ * retrieve information for a specific location
+ * http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid={API key}
+ *
+ * @param {Object} city
+ * @param {String} units
+ * @param {String} exclude
+ * @param {String} lang
+ * @returns {Object|Error}
+ */
+export async function searchByLocation(city: string) {
+  try {
+    // throw error if latitude or longitude are empty
+    if (!city) {
+      throw new Error("you must provide latitude and longitude");
+    }
+
+    // set url for fetching data
+    const urlToFetch = `${OPENWEATHER_API_URL}/geo/1.0/direct?q=${city}&limit=5&appid=${OPENWEATHER_API_KEY}`;
 
     const response = await fetch(urlToFetch);
     const data = await response.json();
