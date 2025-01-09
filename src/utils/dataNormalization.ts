@@ -2,12 +2,21 @@ import { getWindDirection, convertToKmh } from "./windOperations";
 import { dateToString } from "./dateOperations";
 import { kelvinToCelsius, kelvinToFahrenheit } from "./temperatureOperations";
 import { TUserLanguage } from "@contexts/LanguageContext/types";
-import { TCurrentForecast } from "@components/Forecast/types";
+import {
+  TCurrentForecast,
+  TDailyForecast,
+  THourlyForecast,
+} from "@components/Forecast/types";
 
 type NormalizeData = (
-  dataObject: TCurrentForecast,
+  dataObject: TCurrentForecast | TDailyForecast,
   language: TUserLanguage
 ) => any;
+
+type TemperatureObj = Record<
+  "tempC" | "tempF",
+  string | undefined | Record<"min" | "max", string>
+>;
 
 /**
  * Normalizes datas from API
@@ -26,12 +35,15 @@ export const normalizeData: NormalizeData = (dataObject, language = "en") => {
 
   // precipitation probability
   let precipitationProb = 0;
-  if (dataObject?.pop) {
+  if ("pop" in dataObject) {
     precipitationProb = Math.round(dataObject.pop * 100);
   }
 
   // actual temperatures
-  let temperature = {};
+  let temperature: TemperatureObj = {
+    tempC: undefined,
+    tempF: undefined,
+  };
   if (typeof dataObject.temp === "number") {
     temperature.tempC = kelvinToCelsius(dataObject.temp);
     temperature.tempF = kelvinToFahrenheit(dataObject.temp);
@@ -47,7 +59,10 @@ export const normalizeData: NormalizeData = (dataObject, language = "en") => {
   }
 
   // feels like temperatures
-  let feelsLike = {};
+  let feelsLike: TemperatureObj = {
+    tempC: undefined,
+    tempF: undefined,
+  };
   if (typeof dataObject.feels_like === "number") {
     feelsLike.tempC = kelvinToCelsius(dataObject.feels_like);
     feelsLike.tempF = kelvinToFahrenheit(dataObject.feels_like);
@@ -71,8 +86,19 @@ export const normalizeData: NormalizeData = (dataObject, language = "en") => {
   const sunsetDateTime = dateToString(dataObject.sunset, language);
 
   // moonrise and moonset
-  const moonriseDateTime = dateToString(dataObject.moonrise, language);
-  const moonsetDateTime = dateToString(dataObject.moonset, language);
+  let moonriseTime = "";
+  if ("moonrise" in dataObject) {
+    moonriseTime = dateToString(dataObject.moonrise, language).time;
+  }
+  let moonseteTime = "";
+  if ("moonset" in dataObject) {
+    moonseteTime = dateToString(dataObject.moonset, language).time;
+  }
+
+  let moonPhase = 0;
+  if ("moon_phase" in dataObject) {
+    moonPhase = dataObject.moon_phase;
+  }
 
   return {
     date: dateTime.date,
@@ -92,11 +118,16 @@ export const normalizeData: NormalizeData = (dataObject, language = "en") => {
     windDirection,
     sunrise: sunriseDateTime.time,
     sunset: sunsetDateTime.time,
-    moonrise: moonriseDateTime.time,
-    moonset: moonsetDateTime.time,
-    moonphase: dataObject.moon_phase,
+    moonrise: moonriseTime,
+    moonset: moonseteTime,
+    moonphase: moonPhase,
   };
 };
+
+type NormalizeHourlyData = (
+  dataObject: THourlyForecast,
+  language: TUserLanguage
+) => any;
 
 /**
  * Normalizes datas from API | hourly data
@@ -105,7 +136,10 @@ export const normalizeData: NormalizeData = (dataObject, language = "en") => {
  * @param {String} language
  * @returns {Object} Normalized data
  */
-export function normalizeHourlyData(dataObject, language = "en") {
+export const normalizeHourlyData: NormalizeHourlyData = (
+  dataObject,
+  language = "en"
+) => {
   // current date time
   const dateTime = dateToString(dataObject.dt, language);
 
@@ -128,36 +162,16 @@ export function normalizeHourlyData(dataObject, language = "en") {
   }
 
   // actual temperatures
-  let temperature = {};
-  if (typeof dataObject.temp === "number") {
-    temperature.tempC = kelvinToCelsius(dataObject.temp);
-    temperature.tempF = kelvinToFahrenheit(dataObject.temp);
-  } else {
-    temperature.tempC = {
-      min: kelvinToCelsius(dataObject.temp.min),
-      max: kelvinToCelsius(dataObject.temp.max),
-    };
-    temperature.tempF = {
-      min: kelvinToFahrenheit(dataObject.temp.min),
-      max: kelvinToFahrenheit(dataObject.temp.max),
-    };
-  }
+  const temperature = {
+    tempC: kelvinToCelsius(dataObject.temp),
+    tempF: kelvinToFahrenheit(dataObject.temp),
+  };
 
   // feels like temperatures
-  let feelsLike = {};
-  if (typeof dataObject.feels_like === "number") {
-    feelsLike.tempC = kelvinToCelsius(dataObject.feels_like);
-    feelsLike.tempF = kelvinToFahrenheit(dataObject.feels_like);
-  } else {
-    feelsLike.tempC = {
-      min: kelvinToCelsius(dataObject.feels_like.day),
-      max: kelvinToCelsius(dataObject.feels_like.night),
-    };
-    feelsLike.tempF = {
-      min: kelvinToFahrenheit(dataObject.feels_like.day),
-      max: kelvinToFahrenheit(dataObject.feels_like.night),
-    };
-  }
+  const feelsLike = {
+    tempC: kelvinToCelsius(dataObject.feels_like),
+    tempF: kelvinToFahrenheit(dataObject.feels_like),
+  };
 
   // wind speed and direction
   const windSpeed = convertToKmh(dataObject.wind_speed);
@@ -180,4 +194,4 @@ export function normalizeHourlyData(dataObject, language = "en") {
     windSpeed,
     windDirection,
   };
-}
+};

@@ -43,8 +43,7 @@ export default function ThemeContextProvider({
   }, []);
 
   const muiTheme = useMemo(() => {
-    // return createTheme(theme === "light" ? lightTheme : darkTheme);
-    return createTheme(lightTheme);
+    return createTheme(theme === "light" ? lightTheme : darkTheme);
   }, [theme]);
 
   return (

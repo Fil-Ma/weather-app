@@ -14,7 +14,7 @@ export default function HourlyForecast({ data }: { data: THourlyForecast[] }) {
       columnLabels={columnLabels}
       rows={rows}
       rowLabelsDictionary={dictionary.forecast.hourly["row-labels"]}
-      renderValue={(element: any, index: number, key: string) => {
+      renderValue={(element: any, _: number, key: string) => {
         if (key === "image") {
           return <img src={buildIconUrl(element)} alt={element} />;
         } else {

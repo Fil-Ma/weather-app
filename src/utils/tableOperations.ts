@@ -1,14 +1,19 @@
+import { TDailyForecast, THourlyForecast } from "@components/Forecast/types";
 import { normalizeData } from "./dataNormalization";
 import { normalizeHourlyData } from "./dataNormalization";
+import { TUserLanguage } from "@contexts/LanguageContext/types";
 /**
  * Creates rows data from weather daily data object.
  *
  * @param {Object} dailyData
  * @returns {Object} object of arrays
  */
-export function createTableData(dailyDataObject, language) {
-  const columnLabels = [];
-  const rows = {
+export function createTableData(
+  dailyDataObject: TDailyForecast[],
+  language: TUserLanguage
+) {
+  const columnLabels: string[] = [];
+  const rows: Record<string, any[]> = {
     image: [],
     description: [],
     precipitationProbability: [],
@@ -41,7 +46,7 @@ export function createTableData(dailyDataObject, language) {
 
     // precipitation, rain, snow volumes
     rows.precipitationProbability.push(
-      normalizedObject.precipitationProbability,
+      normalizedObject.precipitationProbability
     );
     rows.rain.push(normalizedObject?.rain ? normalizedObject.rain : "-");
     rows.snow.push(normalizedObject?.snow ? normalizedObject.snow : "-");
@@ -73,9 +78,12 @@ export function createTableData(dailyDataObject, language) {
  * @param {Object} hourlyData
  * @returns {Object} object of arrays
  */
-export function createHourlyTableData(hourlyDataObject, language) {
-  const columnLabels = [];
-  const rows = {
+export function createHourlyTableData(
+  hourlyDataObject: THourlyForecast[],
+  language: TUserLanguage
+) {
+  const columnLabels: string[] = [];
+  const rows: Record<string, any[]> = {
     image: [],
     description: [],
     precipitationProbability: [],
@@ -103,7 +111,7 @@ export function createHourlyTableData(hourlyDataObject, language) {
 
     // precipitation, rain, snow volumes
     rows.precipitationProbability.push(
-      normalizedObject.precipitationProbability,
+      normalizedObject.precipitationProbability
     );
     rows.rain.push(normalizedObject?.rain ? normalizedObject.rain : "-");
     rows.snow.push(normalizedObject?.snow ? normalizedObject.snow : "-");

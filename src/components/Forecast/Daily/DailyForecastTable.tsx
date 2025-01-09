@@ -18,7 +18,7 @@ export default function DailyForecastTable({
       columnLabels={columnLabels}
       rows={rows}
       rowLabelsDictionary={dictionary.forecast.daily["row-labels"]}
-      renderValue={(element: any, index: number, key: string) => {
+      renderValue={(element: any, _: number, key: string) => {
         const renderMinMax =
           key === "temperatureCelsius" ||
           key === "feelsLikeCelsius" ||
