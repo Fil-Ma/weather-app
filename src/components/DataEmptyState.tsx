@@ -8,7 +8,6 @@ function DataEmptyState() {
     <Box
       sx={{
         textAlign: "center",
-        height: "50vh",
         color: "primary.contrastText",
       }}
     >

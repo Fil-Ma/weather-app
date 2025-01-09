@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
+import { buildIconUrl } from "@api/index";
 
 export default function CurrentStatus({
   location,
@@ -11,6 +12,7 @@ export default function CurrentStatus({
   currentStatus: string;
 }) {
   const { dictionary } = useLanguageContext();
+  const iconUrl = buildIconUrl(image);
 
   return (
     <Box
@@ -33,7 +35,11 @@ export default function CurrentStatus({
       </Box>
 
       <Box gridRow="2 / span 4">
-        <img src="#" style={{ height: "100%" }} alt="forecast status current" />
+        <img
+          src={iconUrl}
+          style={{ height: "100%" }}
+          alt="forecast status current"
+        />
       </Box>
 
       <Box gridRow="6 / 7">

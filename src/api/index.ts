@@ -40,10 +40,7 @@ export async function retrieveWeatherData(city: TCity) {
  * retrieve information for a specific location
  * http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid={API key}
  *
- * @param {Object} city
- * @param {String} units
- * @param {String} exclude
- * @param {String} lang
+ * @param {String} city
  * @returns {Object|Error}
  */
 export async function searchByLocation(city: string) {
@@ -63,4 +60,15 @@ export async function searchByLocation(city: string) {
     // throw new Error(error);
     console.log(error);
   }
+}
+
+/**
+ * retrieve an icon for the forecast
+ * https://openweathermap.org/img/wn/10d@2x.png
+ *
+ * @param {String} icon
+ * @returns {String}
+ */
+export function buildIconUrl(icon: string) {
+  return `https://openweathermap.org/img/wn/${icon}@2x.png`;
 }

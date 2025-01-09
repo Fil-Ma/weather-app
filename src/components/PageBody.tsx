@@ -43,6 +43,7 @@ export default function PageBody() {
 const Main = styled("main")(({ theme }) => ({
   paddingBlock: "2rem",
   paddingInline: "4rem",
+  flexGrow: 1,
 
   [theme.breakpoints.down("sm")]: {
     paddingInline: "1rem",
