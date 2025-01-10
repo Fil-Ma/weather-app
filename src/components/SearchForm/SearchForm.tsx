@@ -35,7 +35,7 @@ const SearchForm = ({ onSubmit }: Props) => {
 
   return (
     <Section>
-      <Typography sx={{ color: "primary.contrastText" }}>
+      <Typography color="textPrimary">
         {dictionary.search["search-bar"].title}
       </Typography>
       {hasGeolocation && (
@@ -53,7 +53,9 @@ const SearchForm = ({ onSubmit }: Props) => {
 
       {options.length > 0 && (
         <>
-          <Typography>{options.length} results found</Typography>
+          <Typography color="textPrimary">
+            {options.length} results found
+          </Typography>
           <CityOptionsList>
             {options.map((option, index) => {
               const { lat, lon, ...rest } = option;

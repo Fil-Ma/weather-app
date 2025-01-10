@@ -11,7 +11,7 @@ function DataEmptyState() {
         color: "primary.contrastText",
       }}
     >
-      <Typography component="h2">
+      <Typography component="h2" color="textPrimary">
         {dictionary.forecast.container["no-data-message"]}
       </Typography>
     </Box>

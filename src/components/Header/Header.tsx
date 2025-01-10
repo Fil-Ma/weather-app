@@ -2,10 +2,10 @@ import { useState } from "react";
 import {
   AppBar,
   Typography,
-  Button,
   Toolbar,
   Tooltip,
   styled,
+  IconButton,
 } from "@mui/material";
 import { useThemeContext } from "@contexts/ThemeContext/ThemeContextProvider";
 import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
@@ -45,7 +45,9 @@ export default function Header() {
 
   return (
     <CustomAppBar>
-      <Typography sx={{ backgroundColor: "primary.main", color: "#FFF" }}>
+      <Typography
+        sx={{ backgroundColor: "primary.main", color: "primary.contrastText" }}
+      >
         {dictionary.header.title}
       </Typography>
 
@@ -56,7 +58,7 @@ export default function Header() {
         />
         {actions.map(({ tooltipTitle, onClick, Icon }) => (
           <Tooltip key={tooltipTitle} title={tooltipTitle} arrow={true}>
-            <Button
+            <IconButton
               onClick={onClick}
               sx={{
                 color: "primary.contrastText",
@@ -64,7 +66,7 @@ export default function Header() {
               }}
             >
               <Icon />
-            </Button>
+            </IconButton>
           </Tooltip>
         ))}
       </Toolbar>

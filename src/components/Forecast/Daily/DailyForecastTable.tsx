@@ -3,6 +3,7 @@ import { createTableData } from "@utils/tableOperations";
 import { TDailyForecast } from "../types";
 import { buildIconUrl } from "@api/index";
 import CustomTable from "@components/common/CustomTable";
+import CustomImage from "@components/common/CustomImage";
 
 export default function DailyForecastTable({
   data,
@@ -28,7 +29,7 @@ export default function DailyForecastTable({
         if (renderMinMax) {
           return `${element.min} | ${element.max}`;
         } else if (key === "image") {
-          return <img src={buildIconUrl(element)} alt={element} />;
+          return <CustomImage src={buildIconUrl(element)} alt={element} />;
         } else {
           return element;
         }

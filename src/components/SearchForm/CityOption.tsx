@@ -11,8 +11,8 @@ const CityOption = ({ name, country, state, onClick }: Props) => {
   const regionNames = new Intl.DisplayNames([language], { type: "region" });
   return (
     <Item onClick={onClick}>
-      <Typography>{name}</Typography>
-      <Typography>
+      <Typography color="textPrimary">{name}</Typography>
+      <Typography color="textSecondary">
         {state}, {regionNames.of(country)}
       </Typography>
     </Item>

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Box, Typography, ButtonGroup, Button } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
 import { TCurrentForecast } from "../types";
 import { dateToString } from "@utils/dateOperations";
@@ -8,19 +7,16 @@ import {
   kelvinToCelsius,
   kelvinToFahrenheit,
 } from "@utils/temperatureOperations";
+import Toggle from "@components/common/Toggle";
+import useUnitsToggle from "@hooks/useUnitsToggle";
 
 export default function CurrentWeatherData({
   data,
 }: {
   data: TCurrentForecast;
 }) {
-  const [isTemperatureCelsius, setIsTemperatureCelsius] = useState(true);
   const { dictionary, language } = useLanguageContext();
-
-  function toggleTemperatureUnits(event: React.MouseEvent<HTMLButtonElement>) {
-    event.preventDefault();
-    setIsTemperatureCelsius(!isTemperatureCelsius);
-  }
+  const { unit, options, onChange } = useUnitsToggle();
 
   const { date, time } = dateToString(data.dt, language);
   const windSpeed = convertToKmh(data.wind_speed);
@@ -29,12 +25,14 @@ export default function CurrentWeatherData({
   const sunriseDateTime = dateToString(data.sunrise, language);
   const sunsetDateTime = dateToString(data.sunset, language);
 
-  const temperature = isTemperatureCelsius
-    ? kelvinToCelsius(data.temp)
-    : kelvinToFahrenheit(data.temp);
-  const feels_like = isTemperatureCelsius
-    ? kelvinToCelsius(data.feels_like)
-    : kelvinToFahrenheit(data.feels_like);
+  const temperature =
+    unit === "celsius"
+      ? kelvinToCelsius(data.temp)
+      : kelvinToFahrenheit(data.temp);
+  const feels_like =
+    unit === "fahrenheit"
+      ? kelvinToCelsius(data.feels_like)
+      : kelvinToFahrenheit(data.feels_like);
 
   return (
     <Box
@@ -51,70 +49,50 @@ export default function CurrentWeatherData({
       }}
     >
       <Box gridRow="1">
-        <Typography>
+        <Typography color="textPrimary">
           {date} | {time}
         </Typography>
       </Box>
 
       <Box gridRow="2/4">
-        <ButtonGroup variant="contained" sx={{ mb: "0.5rem" }}>
-          <Button
-            sx={{
-              fontSize: "0.7rem",
-              p: "0.25rem 1rem",
-              backgroundColor: "primary.main",
-              color: "#FFF",
-            }}
-            disabled={!isTemperatureCelsius}
-            onClick={toggleTemperatureUnits}
-          >
-            Fahrenheit
-          </Button>
-          <Button
-            sx={{
-              fontSize: "0.7rem",
-              p: "0.25rem 1rem",
-              backgroundColor: "primary.main",
-              color: "#FFF",
-            }}
-            disabled={isTemperatureCelsius}
-            onClick={toggleTemperatureUnits}
-          >
-            Celsius
-          </Button>
-        </ButtonGroup>
-        <Typography>
+        <Toggle
+          value={unit}
+          options={options}
+          size="small"
+          onChange={onChange}
+        />
+        <Typography color="textPrimary">
           {`${dictionary.forecast.current.temperature} ${temperature}° ${
-            isTemperatureCelsius ? "celsius" : "fahrenheit"
+            unit === "celsius" ? "celsius" : "fahrenheit"
           }`}
         </Typography>
-        <Typography>
+        <Typography color="textPrimary">
           {`${
             dictionary.forecast.current["feels-like-temperature"]
-          } ${feels_like}° ${isTemperatureCelsius ? "celsius" : "fahrenheit"}`}
+          } ${feels_like}° ${unit === "celsius" ? "celsius" : "fahrenheit"}`}
         </Typography>
       </Box>
 
       <Box gridRow="4/5">
-        <Typography>
+        <Typography color="textPrimary">
           {dictionary.forecast.current.pressure + data.pressure + "hPa"}
         </Typography>
-        <Typography>
+        <Typography color="textPrimary">
           {dictionary.forecast.current.humidity + data.humidity + "%"}
         </Typography>
       </Box>
 
       <Box gridRow="5/6">
-        <Typography>
+        <Typography color="textPrimary">
           {dictionary.forecast.current["wind-speed"] + windSpeed + "Km/h"}
         </Typography>
-        <Typography>
+        <Typography color="textPrimary">
           {dictionary.forecast.current["wind-direction"] + windDirection}
         </Typography>
       </Box>
 
       <Box gridRow="6/7">
-        <Typography>
+        <Typography color="textPrimary">
           {`${dictionary.forecast.current.sunrise}${sunriseDateTime.time} | ${dictionary.forecast.current.sunset}${sunsetDateTime.time}`}
         </Typography>
       </Box>

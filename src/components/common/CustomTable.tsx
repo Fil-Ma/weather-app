@@ -36,7 +36,9 @@ const CustomTable = ({
         p: "1rem 2rem",
       }}
     >
-      <Typography component="h2">{title}</Typography>
+      <Typography component="h2" color="textPrimary">
+        {title}
+      </Typography>
       <TableContainer sx={{ mt: "2rem" }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHeader labels={columnLabels} />
@@ -47,7 +49,7 @@ const CustomTable = ({
                   <TableCell
                     sx={{
                       backgroundColor: "background.paper",
-                      color: "primary.contrastText",
+                      color: "textPrimary",
                       position: "sticky", // ?
                       left: 0, // ?
                     }}
@@ -60,7 +62,7 @@ const CustomTable = ({
                       align="center"
                       sx={{
                         backgroundColor: "background.paper",
-                        color: "primary.contrastText",
+                        color: "textPrimary",
                         minWidth: "5rem", // ?
                       }}
                       key={index}

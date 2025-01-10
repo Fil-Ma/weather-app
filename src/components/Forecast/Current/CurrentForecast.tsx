@@ -3,6 +3,7 @@ import CurrentWeatherData from "./CurrentWeatherData";
 import { TCurrentForecast } from "../types";
 import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
 import { buildIconUrl } from "@api/index";
+import CustomImage from "@components/common/CustomImage";
 
 type Props = {
   location: string;
@@ -16,13 +17,13 @@ function CurrentForecast({ location, data }: Props) {
     <Container>
       <CurrentStatus gridColumn="1">
         <Box gridRow="1">
-          <Typography>
+          <Typography color="textPrimary">
             {dictionary.forecast.current.status.location}: {location}
           </Typography>
         </Box>
 
         <Box gridRow="2 / span 4">
-          <img
+          <CustomImage
             src={iconUrl}
             style={{ height: "100%" }}
             alt="forecast status current"
@@ -30,7 +31,7 @@ function CurrentForecast({ location, data }: Props) {
         </Box>
 
         <Box gridRow="6 / 7">
-          <Typography>
+          <Typography color="textPrimary">
             {dictionary.forecast.current.status.description}:{" "}
             {data.weather[0].description}
           </Typography>
