@@ -1,4 +1,4 @@
-type TWeather = {
+export type TWeather = {
   id: number;
   main: string;
   description: string;

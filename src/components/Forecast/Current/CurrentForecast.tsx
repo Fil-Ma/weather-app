@@ -1,9 +1,10 @@
 import { Box, styled, Typography } from "@mui/material";
-import CurrentWeatherData from "./CurrentWeatherData";
 import { TCurrentForecast } from "../types";
+import { kelvinToCelsius } from "@utils/temperatureOperations";
+import CurrentWeather from "./CurrentWeather";
+import { convertToKmh, getWindDirection } from "@utils/windOperations";
+import { dateToString } from "@utils/dateOperations";
 import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
-import { buildIconUrl } from "@api/index";
-import CustomImage from "@components/common/CustomImage";
 
 type Props = {
   location: string;
@@ -11,36 +12,60 @@ type Props = {
 };
 
 function CurrentForecast({ location, data }: Props) {
-  const { dictionary } = useLanguageContext();
-  const iconUrl = buildIconUrl(data.weather[0].icon);
+  const { dictionary, language } = useLanguageContext();
+
+  const locationItems = [
+    {
+      title: "location",
+      content: "",
+    },
+    {
+      title: "location time",
+      content: "",
+    },
+  ];
+
+  const stats = [
+    {
+      title: dictionary.forecast.current.pressure,
+      content: data.pressure + " hPa",
+    },
+    {
+      title: dictionary.forecast.current.humidity,
+      content: data.humidity + "%",
+    },
+    {
+      title: dictionary.forecast.current["wind-speed"],
+      content: convertToKmh(data.wind_speed) + " Km/h",
+    },
+    {
+      title: dictionary.forecast.current["wind-direction"],
+      content: getWindDirection(data.wind_deg),
+    },
+  ];
+
+  const sunriseDateTime = dateToString(data.sunrise, language);
+  const sunsetDateTime = dateToString(data.sunset, language);
+
   return (
     <Container>
-      <CurrentStatus gridColumn="1">
-        <Box gridRow="1">
-          <Typography color="textPrimary">
-            {dictionary.forecast.current.status.location}: {location}
-          </Typography>
-        </Box>
-
-        <Box gridRow="2 / span 4">
-          <CustomImage
-            src={iconUrl}
-            style={{ height: "100%" }}
-            alt="forecast status current"
-          />
-        </Box>
-
-        <Box gridRow="6 / 7">
-          <Typography color="textPrimary">
-            {dictionary.forecast.current.status.description}:{" "}
-            {data.weather[0].description}
-          </Typography>
-        </Box>
+      <CurrentStatus>
+        {locationItems.map(({ title, content }) => (
+          <Typography key={title}>{title}</Typography>
+        ))}
+        <CurrentWeather
+          weather={data.weather[0]}
+          temperature={kelvinToCelsius(data.temp)}
+        />
       </CurrentStatus>
-
-      <Box gridColumn="2">
-        <CurrentWeatherData data={data} />
-      </Box>
+      <StatsContainer>
+        {stats.map(({ title, content }) => (
+          <StatsItem key={title}>
+            <Typography color="textSecondary">{title}</Typography>
+            <Typography color="textPrimary">{content}</Typography>
+          </StatsItem>
+        ))}
+      </StatsContainer>
     </Container>
   );
 }
@@ -48,28 +73,42 @@ function CurrentForecast({ location, data }: Props) {
 export default CurrentForecast;
 
 const Container = styled(Box)(({ theme }) => ({
-  display: "grid",
-  gridTemplateColumns: "repeat(2, 1fr)",
-  gap: "24px",
-  marginBlock: "3rem",
+  display: "flex",
+  flexDirection: "row",
+  gap: "32px",
+  marginBlock: "2rem",
 
   [theme.breakpoints.down("sm")]: {
-    display: "block",
+    flexDirection: "column",
+    alignItems: "stretch",
   },
 }));
 
 const CurrentStatus = styled(Box)(({ theme }) => ({
-  display: "grid",
-  gridTemplateRows: "2rem repeat(4, 1fr) 2rem",
-  gap: "12px",
-  height: "max-content",
+  flex: 1,
+  display: "flex",
+  flexDirection: "column",
+  gap: "8px",
   backgroundColor: theme.palette.background.paper,
-  color: theme.palette.primary.contrastText,
-  borderRadius: "1rem",
+  color: theme.palette.text.primary,
+  textTransform: "capitalize",
+  borderRadius: "8px",
   padding: "1rem 2rem",
   border: "1px solid rgba(0,0,0,0.3)",
+}));
 
-  [theme.breakpoints.down("sm")]: {
-    marginBottom: "2rem",
-  },
+const StatsContainer = styled(Box)(() => ({
+  flex: 1,
+  display: "grid",
+  gridTemplateColumns: "repeat(2, 1fr)",
+  gap: "24px",
+}));
+
+const StatsItem = styled(Box)(({ theme }) => ({
+  border: "1px solid rgba(0,0,0,0.3)",
+  backgroundColor: theme.palette.background.paper,
+  color: theme.palette.text.primary,
+  textTransform: "capitalize",
+  borderRadius: "8px",
+  padding: "1rem",
 }));

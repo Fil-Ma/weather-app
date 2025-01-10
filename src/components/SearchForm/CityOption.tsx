@@ -9,11 +9,12 @@ interface Props extends Omit<TCityOption, "lat" | "lon"> {
 const CityOption = ({ name, country, state, onClick }: Props) => {
   const { language } = useLanguageContext();
   const regionNames = new Intl.DisplayNames([language], { type: "region" });
+  const cityRegion = regionNames.of(country);
   return (
     <Item onClick={onClick}>
       <Typography color="textPrimary">{name}</Typography>
       <Typography color="textSecondary">
-        {state}, {regionNames.of(country)}
+        {state ? `${state}, ${cityRegion}` : cityRegion}
       </Typography>
     </Item>
   );
