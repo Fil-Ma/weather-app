@@ -1,9 +1,16 @@
 import React, { useState } from "react";
-import { Button, styled, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  InputAdornment,
+  styled,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
 import LocationIcon from "@assets/icons/map-pin.svg?react";
 import useSearchLocation from "@hooks/useSearchLocation";
 import CityOption from "./CityOption";
+import SearchIcon from "@assets/icons/search.svg?react";
 
 type Props = {
   onSubmit: (
@@ -45,7 +52,19 @@ const SearchForm = ({ onSubmit }: Props) => {
       )}
 
       <Form onSubmit={handleSubmit}>
-        <Input value={city} onChange={(event) => setCity(event.target.value)} />
+        <Input
+          value={city}
+          onChange={(event) => setCity(event.target.value)}
+          slotProps={{
+            input: {
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            },
+          }}
+        />
         <Button variant="contained" type="submit">
           Search
         </Button>
@@ -86,7 +105,7 @@ const CityOptionsList = styled("ul")(() => ({
 }));
 
 const Section = styled("section")(({ theme }) => ({
-  marginBottom: "4rem",
+  marginBottom: "3rem",
   marginInline: "auto",
   display: "flex",
   flexDirection: "column",

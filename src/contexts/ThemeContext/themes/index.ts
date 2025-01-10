@@ -39,6 +39,9 @@ export const lightThemePalette: PaletteOptions = {
     default: "#e3f2fd",
     paper: "#ffffff",
   },
+  text: {
+    primary: "rgba(0, 0, 0, 0.87)",
+  },
 };
 
 export const darkThemePalette: PaletteOptions = {
@@ -53,5 +56,8 @@ export const darkThemePalette: PaletteOptions = {
   background: {
     default: "#2e3b4e",
     paper: "#37475a",
+  },
+  text: {
+    primary: "rgba(255, 255, 255, 0.87)",
   },
 };

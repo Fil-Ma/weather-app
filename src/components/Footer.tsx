@@ -6,12 +6,6 @@ import InstagramIcon from "@assets/icons/instagram.svg?react";
 import FacebookIcon from "@assets/icons/facebook.svg?react";
 import { styled } from "@mui/material";
 
-const socialLinkStyle = {
-  underline: "none",
-  ml: "1rem",
-  color: "primary.contrastText",
-};
-
 const socialLinks = [
   {
     url: "#",
@@ -30,13 +24,11 @@ const socialLinks = [
 export default function Footer() {
   return (
     <StyledFooter>
-      <Typography color="primary.contrastText">
-        &#169; All right reserved
-      </Typography>
+      <Typography color="textPrimary">&#169; All right reserved</Typography>
 
-      <Box className="social-container">
+      <Box>
         {socialLinks.map(({ url, Icon }, index) => (
-          <Link key={index} href={url} underline="none" sx={socialLinkStyle}>
+          <Link key={index} href={url} underline="none" color="textPrimary">
             <Icon />
           </Link>
         ))}
@@ -52,7 +44,12 @@ const StyledFooter = styled("footer")(({ theme }) => ({
   justifyContent: "space-between",
   height: "4rem",
   paddingInline: "4rem",
-  color: "primary.contrastText",
+
+  div: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "8px",
+  },
 
   [theme.breakpoints.down("sm")]: {
     paddingInline: "1rem",

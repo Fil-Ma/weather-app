@@ -3,8 +3,8 @@ import { TCurrentForecast } from "../types";
 import { kelvinToCelsius } from "@utils/temperatureOperations";
 import CurrentWeather from "./CurrentWeather";
 import { convertToKmh, getWindDirection } from "@utils/windOperations";
-import { dateToString } from "@utils/dateOperations";
 import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
+import MapPinIcon from "@assets/icons/map-pin.svg?react";
 
 type Props = {
   location: string;
@@ -12,12 +12,13 @@ type Props = {
 };
 
 function CurrentForecast({ location, data }: Props) {
-  const { dictionary, language } = useLanguageContext();
+  const { dictionary } = useLanguageContext();
 
   const locationItems = [
     {
       title: "location",
-      content: "",
+      Icon: <MapPinIcon />,
+      content: location,
     },
     {
       title: "location time",
@@ -28,40 +29,53 @@ function CurrentForecast({ location, data }: Props) {
   const stats = [
     {
       title: dictionary.forecast.current.pressure,
-      content: data.pressure + " hPa",
+      Icon: <MapPinIcon />,
+      content: data.pressure,
     },
     {
       title: dictionary.forecast.current.humidity,
-      content: data.humidity + "%",
+      Icon: <MapPinIcon />,
+      content: data.humidity,
     },
     {
-      title: dictionary.forecast.current["wind-speed"],
-      content: convertToKmh(data.wind_speed) + " Km/h",
+      title: dictionary.forecast.current.windSpeed,
+      Icon: <MapPinIcon />,
+      content: convertToKmh(data.wind_speed),
     },
     {
-      title: dictionary.forecast.current["wind-direction"],
+      title: dictionary.forecast.current.windDirection,
+      Icon: <MapPinIcon />,
       content: getWindDirection(data.wind_deg),
     },
   ];
 
-  const sunriseDateTime = dateToString(data.sunrise, language);
-  const sunsetDateTime = dateToString(data.sunset, language);
+  // const sunriseDateTime = dateToString(data.sunrise, language);
+  // const sunsetDateTime = dateToString(data.sunset, language);
 
   return (
     <Container>
       <CurrentStatus>
-        {locationItems.map(({ title, content }) => (
-          <Typography key={title}>{title}</Typography>
-        ))}
+        {locationItems.map(({ title, Icon, content }) => {
+          if (!content) return null;
+          return (
+            <TextWithIcon key={title}>
+              {Icon}
+              {content}
+            </TextWithIcon>
+          );
+        })}
         <CurrentWeather
           weather={data.weather[0]}
           temperature={kelvinToCelsius(data.temp)}
         />
       </CurrentStatus>
       <StatsContainer>
-        {stats.map(({ title, content }) => (
+        {stats.map(({ title, Icon, content }) => (
           <StatsItem key={title}>
-            <Typography color="textSecondary">{title}</Typography>
+            <TextWithIcon color="textSecondary">
+              {Icon}
+              {title}
+            </TextWithIcon>
             <Typography color="textPrimary">{content}</Typography>
           </StatsItem>
         ))}
@@ -97,11 +111,16 @@ const CurrentStatus = styled(Box)(({ theme }) => ({
   border: "1px solid rgba(0,0,0,0.3)",
 }));
 
-const StatsContainer = styled(Box)(() => ({
+const StatsContainer = styled(Box)(({ theme }) => ({
   flex: 1,
   display: "grid",
   gridTemplateColumns: "repeat(2, 1fr)",
   gap: "24px",
+
+  [theme.breakpoints.down("sm")]: {
+    gridTemplateColumns: "1fr",
+    gap: "16px",
+  },
 }));
 
 const StatsItem = styled(Box)(({ theme }) => ({
@@ -110,5 +129,18 @@ const StatsItem = styled(Box)(({ theme }) => ({
   color: theme.palette.text.primary,
   textTransform: "capitalize",
   borderRadius: "8px",
-  padding: "1rem",
+  padding: "16px",
+
+  [theme.breakpoints.down("sm")]: {
+    padding: "12px",
+  },
+}));
+
+const TextWithIcon = styled(Typography)(() => ({
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "8px",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
 }));
