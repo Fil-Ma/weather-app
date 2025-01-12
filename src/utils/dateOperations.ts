@@ -1,5 +1,15 @@
 import { TUserLanguage } from "@contexts/LanguageContext/types";
 
+export const getDateLanguage = (language: string) => {
+  switch (language) {
+    case "it":
+      return "it-IT";
+    case "en":
+    default:
+      return "en-US";
+  }
+};
+
 /**
  * Converts epoch format data to local.
  *
@@ -13,12 +23,7 @@ export function dateToString(epochDate: number, language: TUserLanguage) {
   currentDateTime.setUTCSeconds(dateEpoch);
 
   // Transform language to Language Tags (BCP 47)
-  let standardLanguageTag;
-  if (language === "en") {
-    standardLanguageTag = "en-US";
-  } else if (language === "it") {
-    standardLanguageTag = "it-IT";
-  }
+  const standardLanguageTag = getDateLanguage(language);
 
   const date = currentDateTime.toLocaleDateString(standardLanguageTag, {
     weekday: "short",

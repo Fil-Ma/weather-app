@@ -97,6 +97,20 @@ export const parseWeatherData = (data: any, city?: string): IParsedData => {
     dailyForecast,
     hourlyForecast,
     alerts,
-    location: city || "",
+    location: {
+      name: city || "",
+      latitude: data.lat,
+      longitude: data.lon,
+      timezone: data.timezone,
+      localTime: calcTime(data.timezone_offset),
+    },
   };
 };
+
+function calcTime(offset: number) {
+  const d = new Date();
+  const utc = d.getTime() + d.getTimezoneOffset() * 60000;
+  const nd = new Date(utc + 1000 * offset);
+
+  return nd;
+}

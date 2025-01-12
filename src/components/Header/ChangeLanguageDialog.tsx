@@ -41,10 +41,15 @@ const ChangeLanguageDialog = ({
 
   return (
     <Dialog open={open} fullWidth maxWidth="xs" onClose={onClose}>
-      <DialogTitle sx={{ color: "primary.contrastText" }}>
+      <DialogTitle
+        sx={{
+          color: "primary.contrastText",
+          backgroundColor: "background.default",
+        }}
+      >
         {dictionary.header["dialog-title"]}
       </DialogTitle>
-      <DialogContent>
+      <DialogContent sx={{ backgroundColor: "background.default" }}>
         <Box component="form" sx={{ display: "flex" }}>
           <FormControl sx={{ m: 1, minWidth: 150 }}>
             <InputLabel
@@ -68,12 +73,12 @@ const ChangeLanguageDialog = ({
           </FormControl>
         </Box>
       </DialogContent>
-      <DialogActions>
+      <DialogActions sx={{ backgroundColor: "background.default" }}>
         {[
           dictionary.header["dialog-cancel"],
           dictionary.header["dialog-accept"],
         ].map((label) => (
-          <Button key={label} onClick={onClose}>
+          <Button key={label} onClick={onClose} color="primary">
             {label}
           </Button>
         ))}

@@ -84,10 +84,18 @@ export type TAlert = {
   tags: string[];
 };
 
+export type TLocation = {
+  name: string;
+  latitude: number;
+  longitude: number;
+  timezone: string;
+  localTime: Date;
+};
+
 export interface IParsedData {
   currentForcast: TCurrentForecast;
   dailyForecast: TDailyForecast[];
   hourlyForecast: THourlyForecast[];
   alerts: TAlert[];
-  location: string;
+  location: TLocation;
 }

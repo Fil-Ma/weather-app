@@ -1,28 +1,40 @@
 import { Box, styled, Typography } from "@mui/material";
-import { TCurrentForecast } from "../types";
+import { TCurrentForecast, TLocation } from "../types";
 import { kelvinToCelsius } from "@utils/temperatureOperations";
 import CurrentWeather from "./CurrentWeather";
 import { convertToKmh, getWindDirection } from "@utils/windOperations";
 import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
 import MapPinIcon from "@assets/icons/map-pin.svg?react";
+import { getDateLanguage } from "@utils/dateOperations";
 
 type Props = {
-  location: string;
+  location: TLocation;
   data: TCurrentForecast;
 };
 
 function CurrentForecast({ location, data }: Props) {
-  const { dictionary } = useLanguageContext();
+  const { dictionary, language } = useLanguageContext();
+
+  const localTime = location.localTime.toLocaleString(
+    getDateLanguage(language),
+    {
+      weekday: "short",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    }
+  );
 
   const locationItems = [
     {
       title: "location",
       Icon: <MapPinIcon />,
-      content: location,
+      content: location.name || `[${location.latitude}, ${location.longitude}]`,
     },
     {
       title: "location time",
-      content: "",
+      content: localTime,
     },
   ];
 
