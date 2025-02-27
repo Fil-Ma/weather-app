@@ -11,6 +11,7 @@ import {
   InputLabel,
   MenuItem,
   OutlinedInput,
+  styled,
 } from "@mui/material";
 import { useLanguageContext } from "@contexts/LanguageContext/LanguageContextProvider";
 import { languageOptions } from "@contexts/LanguageContext/languages";
@@ -40,22 +41,12 @@ const ChangeLanguageDialog = ({
   }, []);
 
   return (
-    <Dialog open={open} fullWidth maxWidth="xs" onClose={onClose}>
-      <DialogTitle
-        sx={{
-          color: "primary.contrastText",
-          backgroundColor: "background.default",
-        }}
-      >
-        {dictionary.header["dialog-title"]}
-      </DialogTitle>
-      <DialogContent sx={{ backgroundColor: "background.default" }}>
+    <StyledDialog open={open} fullWidth maxWidth="xs" onClose={onClose}>
+      <DialogTitle>{dictionary.header["dialog-title"]}</DialogTitle>
+      <DialogContent>
         <Box component="form" sx={{ display: "flex" }}>
           <FormControl sx={{ m: 1, minWidth: 150 }}>
-            <InputLabel
-              id="select-language-dialog"
-              sx={{ color: "primary.contrastText" }}
-            >
+            <InputLabel id="select-language-dialog">
               {dictionary.header["dialog-input-label"]}
             </InputLabel>
             <Select
@@ -64,7 +55,6 @@ const ChangeLanguageDialog = ({
               onChange={(event) => changeUserLanguage(event)}
               input={<OutlinedInput label="Language" />}
               sx={{
-                color: "primary.contrastText",
                 borderColor: "primary.contrastText",
               }}
             >
@@ -73,7 +63,7 @@ const ChangeLanguageDialog = ({
           </FormControl>
         </Box>
       </DialogContent>
-      <DialogActions sx={{ backgroundColor: "background.default" }}>
+      <DialogActions>
         {[
           dictionary.header["dialog-cancel"],
           dictionary.header["dialog-accept"],
@@ -83,8 +73,15 @@ const ChangeLanguageDialog = ({
           </Button>
         ))}
       </DialogActions>
-    </Dialog>
+    </StyledDialog>
   );
 };
 
 export default ChangeLanguageDialog;
+
+const StyledDialog = styled(Dialog)(({ theme }) => ({
+  ".MuiDialog-container > *": {
+    backgroundColor: theme.palette.background.default,
+    color: theme.palette.primary.contrastText,
+  },
+}));
